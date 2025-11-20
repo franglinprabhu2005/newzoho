@@ -1,4 +1,4 @@
-/* src/App.css */
+/* src/App.css - FINAL 100% MOBILE + PC RESPONSIVE VERSION */
 :root {
   --primary: #00ff9d;
   --secondary: #ff00aa;
@@ -27,7 +27,7 @@ nav {
   top: 0; left: 0; right: 0;
   background: rgba(10,10,20,0.95);
   backdrop-filter: blur(20px);
-  padding: 20px 5%;
+  padding: 18px 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -36,13 +36,13 @@ nav {
   transition: all 0.4s;
 }
 nav.scrolled {
-  padding: 15px 5%;
+  padding: 12px 5%;
   background: rgba(10,10,20,0.98);
 }
 
 .logo {
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(28px, 5vw, 36px);
+  font-size: clamp(26px, 6vw, 36px);
   font-weight: 900;
   background: linear-gradient(135deg, #00ff9d, #ff00aa);
   -webkit-background-clip: text;
@@ -53,16 +53,19 @@ nav.scrolled {
 .nav-links {
   display: flex;
   gap: clamp(20px, 4vw, 40px);
+  align-items: center;
 }
+
 .nav-links a {
   color: #fff;
   font-weight: 600;
-  font-size: clamp(16px, 2.5vw, 18px);
+  font-size: clamp(16px, 3vw, 18px);
   position: relative;
   text-decoration: none;
   transition: all 0.4s;
   cursor: pointer;
 }
+
 .nav-links a::after {
   content: '';
   position: absolute;
@@ -74,10 +77,12 @@ nav.scrolled {
   transition: all 0.4s;
   box-shadow: 0 0 15px var(--primary);
 }
+
 .nav-links a:hover {
   color: var(--primary);
   text-shadow: 0 0 15px var(--primary);
 }
+
 .nav-links a:hover::after {
   width: 100%;
   left: 0;
@@ -85,9 +90,10 @@ nav.scrolled {
 
 .menu-icon {
   display: none;
-  font-size: 30px;
+  font-size: 32px;
   color: var(--primary);
   cursor: pointer;
+  z-index: 1001;
 }
 
 /* Hero */
@@ -104,7 +110,7 @@ nav.scrolled {
 
 .hero-content h1 {
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(42px, 10vw, 82px);
+  font-size: clamp(40px, 11vw, 82px);
   font-weight: 900;
   background: linear-gradient(135deg, #00ff9d, #ff00aa, #00d4ff);
   -webkit-background-clip: text;
@@ -116,7 +122,7 @@ nav.scrolled {
 }
 
 .hero-content p {
-  font-size: clamp(18px, 4vw, 26px);
+  font-size: clamp(18px, 4.5vw, 26px);
   max-width: 900px;
   margin: 0 auto 50px;
   opacity: 0.9;
@@ -126,7 +132,7 @@ nav.scrolled {
   background: linear-gradient(135deg, #00ff9d, #ff00aa);
   color: #000;
   padding: clamp(14px, 4vw, 18px) clamp(40px, 8vw, 55px);
-  font-size: clamp(18px, 4vw, 22px);
+  font-size: clamp(18px, 4.5vw, 22px);
   font-weight: 700;
   border: none;
   border-radius: 50px;
@@ -136,6 +142,7 @@ nav.scrolled {
   text-transform: uppercase;
   letter-spacing: 2px;
 }
+
 .cta-btn:hover {
   transform: translateY(-10px) scale(1.05);
   box-shadow: 0 0 80px rgba(0,255,157,0.9);
@@ -178,11 +185,13 @@ nav.scrolled {
   transition: all 0.5s;
   backdrop-filter: blur(10px);
 }
+
 .service-card:hover {
   transform: translateY(-20px);
   border-color: var(--primary);
   box-shadow: 0 0 60px rgba(0,255,157,0.5);
 }
+
 .service-card i {
   font-size: clamp(50px, 10vw, 70px);
   margin-bottom: 25px;
@@ -190,12 +199,14 @@ nav.scrolled {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 .service-card h3 {
   font-size: clamp(22px, 5vw, 28px);
   margin-bottom: 20px;
 }
+
 .service-card p {
-  font-size: clamp(16px, 3.5vw, 19px);
+  font-size: clamp(16px, 3.8vw, 19px);
 }
 
 .contact-info {
@@ -206,17 +217,19 @@ nav.scrolled {
   font-size: clamp(20px, 4.5vw, 24px);
   margin-top: 50px;
 }
+
 .contact-info i {
   margin-right: 15px;
   color: var(--primary);
 }
 
+/* Floating Chatbot Button - Super Mobile Friendly */
 #chatbotBtn {
   position: fixed;
-  bottom: clamp(20px, 5vw, 30px);
-  right: clamp(20px, 5vw, 30px);
-  width: clamp(65px, 15vw, 80px);
-  height: clamp(65px, 15vw, 80px);
+  bottom: clamp(15px, 6vw, 30px);
+  right: clamp(15px, 5vw, 30px);
+  width: clamp(60px, 16vw, 80px);
+  height: clamp(60px, 16vw, 80px);
   border-radius: 50%;
   background: linear-gradient(135deg, #00ff9d, #ff00aa);
   display: flex;
@@ -227,30 +240,60 @@ nav.scrolled {
   z-index: 999;
   animation: float 4s ease-in-out infinite;
 }
+
 #chatbotBtn i {
-  font-size: clamp(32px, 8vw, 40px);
+  font-size: clamp(30px, 9vw, 40px);
   color: #000;
 }
+
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-20px); }
 }
 
-/* Mobile Menu */
+/* MOBILE MENU - 100% FIXED */
 @media (max-width: 768px) {
+  .menu-icon {
+    display: block !important;
+  }
+
   .nav-links {
-    position: absolute;
-    top: 100%;
-    right: 5%;
+    position: fixed;
+    top: 80px;
+    right: 15px;
     background: rgba(10,10,20,0.98);
     flex-direction: column;
     width: 200px;
-    padding: 25px;
-    border-radius: 15px;
+    padding: 20px;
+    border-radius: 16px;
     display: none;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    border: 1px solid rgba(0,255,157,0.3);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    border: 1px solid rgba(0,255,157,0.4);
+    z-index: 999;
   }
-  .nav-links.show { display: flex; }
-  .menu-icon { display: block; }
+
+  .nav-links.show {
+    display: flex !important;
+  }
+
+  .nav-links a {
+    padding: 15px 0;
+    font-size: 19px !important;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  nav {
+    padding: 15px 4% !important;
+  }
+  .logo {
+    font-size: 24px !important;
+  }
+  #chatbotBtn {
+    width: 62px !important;
+    height: 62px !important;
+    right: 12px !important;
+    bottom: 12px !important;
+  }
 }
