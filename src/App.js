@@ -1,392 +1,193 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 
-const THEATRE_MOVIES = [
-  {
-    id: 1,
-    title: "Leo – Special Show",
-    language: "Tamil",
-    rating: 4.7,
-    duration: "2h 45m",
-    trailerUrl: "https://www.youtube.com/watch?v=Po3jStA673E",
-    classes: ["VIP", "Premium", "Economy"],
-  },
-  {
-    id: 2,
-    title: "Jailer – Night Show",
-    language: "Tamil",
-    rating: 4.5,
-    duration: "2h 40m",
-    trailerUrl: "https://www.youtube.com/watch?v=xenOE1Tma0A",
-    classes: ["Balcony", "First Class", "Second Class"],
-  },
-];
-
-const TURF_PACKAGES = [
-  {
-    id: 1,
-    title: "Morning Session",
-    time: "6:00 AM – 9:00 AM",
-    maxPlayers: 14,
-    highlights: ["Cool weather", "Perfect for practice"],
-  },
-  {
-    id: 2,
-    title: "Evening Session",
-    time: "5:00 PM – 8:00 PM",
-    maxPlayers: 14,
-    highlights: ["After office/college", "Match friendly slots"],
-  },
-  {
-    id: 3,
-    title: "Night Session",
-    time: "8:00 PM – 11:00 PM",
-    maxPlayers: 14,
-    highlights: ["Flood lights", "Weekend vibes"],
-  },
-];
-
-function App() {
-  const [activeTab, setActiveTab] = useState("theatre");
-
-  const scrollToSection = (id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+const App = () => {
+  const openSalesIQ = () => {
+    // Zoho SalesIQ script add pannina aprm inga call pannunga
+    if (window.$zoho && window.$zoho.salesiq) {
+      window.$zoho.salesiq.floatwindow.visible("show");
+    } else {
+      // Dev ku hint
+      alert("SalesIQ bot integration pending (add Zoho script in index.html)");
+    }
   };
 
   return (
-    <div className="app-root">
+    <div className="site-root">
       {/* NAVBAR */}
       <header className="nav">
-        <div className="nav-left" onClick={() => scrollToSection("hero")}>
-          <div className="logo-circle">M</div>
-          <div className="logo-text">
-            <span className="logo-title">Moonlight Mahal</span>
-            <span className="logo-sub">Theatre • Turf • Events</span>
+        <div className="nav-brand">
+          <div className="nav-logo">M</div>
+          <div>
+            <div className="nav-title">Moonlight Mahal</div>
+            <div className="nav-sub">Theatre • Turf • Events</div>
           </div>
         </div>
-        <nav className="nav-links">
-          <button onClick={() => scrollToSection("theatre-section")}>
-            Theatre
-          </button>
-          <button onClick={() => scrollToSection("turf-section")}>Turf</button>
-          <button onClick={() => scrollToSection("bot-section")}>
-            Smart Bot
-          </button>
-        </nav>
+        <button className="nav-cta" onClick={openSalesIQ}>
+          Book via Smart Bot 🤖
+        </button>
       </header>
 
-      {/* HERO SECTION */}
-      <section id="hero" className="hero">
-        <div className="hero-content">
-          <h1>
-            Book <span className="accent">Theatre</span> &{" "}
-            <span className="accent">Turf</span> in one smart place.
-          </h1>
-          <p>
-            Our website + AI booking bot makes it easy to reserve{" "}
-            <strong>movie tickets</strong> and <strong>turf slots</strong>{" "}
-            <br />
-            – clear options, instant confirmation, zero confusion.
-          </p>
+      {/* HERO WITH RUNNING LIGHT CIRCLE */}
+      <main className="hero-shell">
+        <section className="hero-grid">
+          <div className="hero-text">
+            <p className="hero-tag">All-in-one booking experience</p>
+            <h1>
+              <span className="highlight">Mahal, Theatre</span> &{" "}
+              <span className="highlight">Turf</span> —
+              <br />
+              booking made visual & clear.
+            </h1>
+            <p className="hero-desc">
+              User ku doubt varama theatre tickets & turf slots book pannuradhu.
+              <br />
+              Google images use pannitu, bot la full details collect pannum:
+              <br />
+              <strong>Movie, trailer, feedback, date, class, time, members</strong> – ellam
+              step-by-step.
+            </p>
 
-          <div className="hero-buttons">
-            <button
-              className="btn-primary"
-              onClick={() => scrollToSection("bot-section")}
-            >
-              Book via Smart Bot
-            </button>
-            <button
-              className="btn-ghost"
-              onClick={() => scrollToSection("theatre-section")}
-            >
-              View Theatre & Turf Details
-            </button>
+            <div className="hero-buttons">
+              <button className="btn-primary" onClick={openSalesIQ}>
+                Open Booking Bot
+              </button>
+              <button
+                className="btn-ghost"
+                onClick={() =>
+                  document
+                    .getElementById("sections")
+                    .scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                View Theatre & Turf
+              </button>
+            </div>
+
+            <div className="hero-badges">
+              <span>Mobile • Tablet • PC</span>
+              <span>Clear Flow UI</span>
+              <span>SalesIQ Integrated</span>
+            </div>
           </div>
 
-          <div className="hero-tags">
-            <span>Mobile Friendly</span>
-            <span>Fast Booking</span>
-            <span>24/7 Bot Support</span>
+          {/* IMAGE + RUNNING LIGHT CIRCLE */}
+          <div className="hero-visual">
+            <div className="orbit-wrapper">
+              {/* outer running light circle */}
+              <div className="orbit-ring orbit-ring-1" />
+              <div className="orbit-ring orbit-ring-2" />
+              <div className="orbit-dots orbit-dots-1" />
+              <div className="orbit-dots orbit-dots-2" />
+              {/* center hero image (from Google image URL) */}
+              <div className="hero-image-circle">
+                <img
+                  src="https://i.pinimg.com/564x/f0/1e/4e/f01e4e11b8b77e6f3b4e06efb3e7f8d4.jpg"
+                  alt="Luxury wedding mahal interior"
+                />
+              </div>
+            </div>
+            <p className="hero-caption">
+              * Sample Google image – your mahal photo vechikalaam
+            </p>
           </div>
-        </div>
+        </section>
 
-        {/* Mirror effect card */}
-        <div className="hero-mirror-wrapper">
-          <div className="mirror-card">
-            <div className="mirror-inner">
-              <div className="mirror-pill">LIVE DEMO</div>
-              <h2>SalesIQ Smart Booking Bot</h2>
+        {/* THEATRE & TURF + BOT SECTION CARDS */}
+        <section id="sections" className="info-grid">
+          {/* THEATRE CARD */}
+          <article className="info-card theatre-card">
+            <div className="info-image">
+              <img
+                src="https://i.pinimg.com/564x/9e/1f/33/9e1f330b2afdfb07b49e03260ddf0bcf.jpg"
+                alt="Cinema theatre red seats"
+              />
+            </div>
+            <div className="info-body">
+              <h2>✨ Theatre Booking</h2>
               <p>
-                • Shows movies, trailers & feedback
-                <br />• Asks date, time, class & tickets
-                <br />• Handles turf date, time & members
-                <br />• Sends booking summary clearly
+                Bot la user ku <strong>movie list</strong> +{" "}
+                <strong>Google trailer link</strong> +{" "}
+                <strong>previous feedback</strong> kaamikkum. Adhu kapparam:
               </p>
-              <div className="mirror-badges">
-                <span>Theatre Booking</span>
-                <span>Turf Booking</span>
-                <span>Multi-device</span>
-              </div>
+              <ul>
+                <li>Movie select</li>
+                <li>Date & show time choose</li>
+                <li>Class (VIP / Balcony / First)</li>
+                <li>Yethana perukku ticket venum nu ketkum</li>
+              </ul>
+              <button className="btn-outline" onClick={openSalesIQ}>
+                Book Theatre via Bot
+              </button>
             </div>
-          </div>
-        </div>
-      </section>
+          </article>
 
-      {/* BOOKING FLOW SECTION */}
-      <section className="flow-section">
-        <h2>How booking works for your users</h2>
-        <p className="section-sub">
-          In this site, users understand everything clearly. The actual booking{" "}
-          <strong>happens in the SalesIQ bot</strong>.
-        </p>
-
-        <div className="flow-grid">
-          <div className="flow-card">
-            <span className="flow-step">Step 1</span>
-            <h3>Select Theatre or Turf</h3>
-            <p>
-              From the homepage or menu, user chooses whether they want{" "}
-              <strong>Movie Ticket</strong> or <strong>Turf Slot</strong>.
-            </p>
-          </div>
-          <div className="flow-card">
-            <span className="flow-step">Step 2</span>
-            <h3>Open Smart Bot</h3>
-            <p>
-              User clicks <strong>“Book via Smart Bot”</strong>. SalesIQ bot
-              opens and shows options for Theatre & Turf.
-            </p>
-          </div>
-          <div className="flow-card">
-            <span className="flow-step">Step 3</span>
-            <h3>Bot collects details</h3>
-            <p>
-              Bot asks all details clearly – movie, date, show time, class,
-              number of tickets or turf time & members.
-            </p>
-          </div>
-          <div className="flow-card">
-            <span className="flow-step">Step 4</span>
-            <h3>Confirmation</h3>
-            <p>
-              Bot shows booking summary. Later you can add{" "}
-              <strong>payment / confirmation message</strong> in the bot flow.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* THEATRE / TURF TABS */}
-      <section className="details-section">
-        <div className="tab-header">
-          <button
-            className={
-              activeTab === "theatre" ? "tab-button active" : "tab-button"
-            }
-            onClick={() => setActiveTab("theatre")}
-          >
-            Theatre
-          </button>
-          <button
-            className={
-              activeTab === "turf" ? "tab-button active" : "tab-button"
-            }
-            onClick={() => setActiveTab("turf")}
-          >
-            Turf
-          </button>
-        </div>
-
-        {activeTab === "theatre" && (
-          <div id="theatre-section" className="tab-content">
-            <h2>Theatre Booking – What user will see in the bot</h2>
-            <p className="section-sub">
-              Below we explain clearly what information your{" "}
-              <strong>SalesIQ bot</strong> will ask for movie bookings.
-            </p>
-
-            <div className="movie-grid">
-              {THEATRE_MOVIES.map((movie) => (
-                <div key={movie.id} className="movie-card fade-up">
-                  <div className="movie-poster">
-                    <span className="poster-tag">Now Showing</span>
-                    <span className="poster-title">{movie.title}</span>
-                  </div>
-                  <div className="movie-body">
-                    <div className="movie-row">
-                      <span>{movie.language}</span>
-                      <span>{movie.duration}</span>
-                    </div>
-                    <div className="movie-rating">
-                      ⭐ {movie.rating} / 5
-                    </div>
-
-                    <div className="movie-classes">
-                      {movie.classes.map((cls) => (
-                        <span key={cls}>{cls}</span>
-                      ))}
-                    </div>
-
-                    <div className="movie-actions">
-                      <a
-                        href={movie.trailerUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="btn-outline"
-                      >
-                        Watch Trailer
-                      </a>
-                      <button
-                        className="btn-primary small"
-                        onClick={() => scrollToSection("bot-section")}
-                      >
-                        Book via Bot
-                      </button>
-                    </div>
-
-                    <p className="movie-note">
-                      🔹 In the bot: User selects movie, then chooses{" "}
-                      <strong>date, show time, class</strong> and{" "}
-                      <strong>how many tickets</strong>.
-                    </p>
-                  </div>
-                </div>
-              ))}
+          {/* TURF CARD */}
+          <article className="info-card turf-card">
+            <div className="info-image">
+              <img
+                src="https://www.agcled.com/uploads/20200318/1584500109897572.jpg"
+                alt="Football turf with flood lights"
+              />
             </div>
-          </div>
-        )}
-
-        {activeTab === "turf" && (
-          <div id="turf-section" className="tab-content">
-            <h2>Turf Booking – What user will see in the bot</h2>
-            <p className="section-sub">
-              For turf, the bot will ask for <strong>date, time slot</strong>{" "}
-              and <strong>number of players</strong>.
-            </p>
-
-            <div className="turf-grid">
-              {TURF_PACKAGES.map((slot) => (
-                <div key={slot.id} className="turf-card fade-up">
-                  <h3>{slot.title}</h3>
-                  <p className="turf-time">{slot.time}</p>
-                  <p className="turf-players">
-                    Max players: <strong>{slot.maxPlayers}</strong>
-                  </p>
-                  <ul className="turf-list">
-                    {slot.highlights.map((h) => (
-                      <li key={h}>{h}</li>
-                    ))}
-                  </ul>
-                  <button
-                    className="btn-primary small"
-                    onClick={() => scrollToSection("bot-section")}
-                  >
-                    Book this slot via Bot
-                  </button>
-                  <p className="turf-note">
-                    🔹 In the bot: User selects date, this slot, then tells{" "}
-                    <strong>how many members</strong>.
-                  </p>
-                </div>
-              ))}
+            <div className="info-body">
+              <h2>⚽ Turf Booking</h2>
+              <p>
+                Turf section la night-time turf Google image use pannuvom, athu
+                pakarthukku users ku feel varum. Bot la:
+              </p>
+              <ul>
+                <li>Date select</li>
+                <li>Time slot (Morning / Evening / Night)</li>
+                <li>How many members (players count)</li>
+              </ul>
+              <button className="btn-outline" onClick={openSalesIQ}>
+                Book Turf via Bot
+              </button>
             </div>
-          </div>
-        )}
-      </section>
+          </article>
 
-      {/* BOT SHOWCASE SECTION */}
-      <section id="bot-section" className="bot-section">
-        <div className="bot-layout">
-          <div className="bot-info">
-            <h2>SalesIQ Booking Bot – Clear, simple & powerful</h2>
-            <p>
-              This website is only to <strong>explain clearly</strong> how
-              booking works. When user clicks the button below, your{" "}
-              <strong>Zoho SalesIQ bot</strong> will open and handle:
-            </p>
-            <ul className="bot-list">
-              <li>🎬 Theatre – movie, trailer link, feedback, show time.</li>
-              <li>🎟️ Tickets – number of tickets, class, date & time.</li>
-              <li>⚽ Turf – date, slot time, how many members.</li>
-              <li>📩 Final summary – neat confirmation message.</li>
-            </ul>
-
-            <button className="btn-primary big">
-              Open Booking Bot (SalesIQ)
-            </button>
-
-            <p className="small-hint">
-              <strong>Dev note:</strong> Here you will add your SalesIQ script
-              to open the bot – either as a chat widget or popup screen.
-            </p>
-          </div>
-
-          {/* Fake chat preview with mirror style */}
-          <div className="bot-preview mirror-card">
-            <div className="bot-chat-window">
-              <div className="bot-header">
-                <span className="bot-dot"></span>
-                <span className="bot-dot"></span>
-                <span className="bot-dot"></span>
-                <span className="bot-title">Moonlight Booking Bot</span>
-              </div>
-              <div className="bot-chat-body">
-                <div className="bot-msg bot">
-                  👋 Hi! What would you like to book today?
-                  <br />
-                  <strong>1) Theatre • 2) Turf</strong>
-                </div>
-                <div className="bot-msg user">I want Theatre tickets 🎬</div>
-                <div className="bot-msg bot">
-                  Super! Please select:
-                  <br />
-                  • Movie
-                  <br />
-                  • Date & show time
-                  <br />
-                  • Class
-                  <br />• Number of tickets
-                </div>
-                <div className="bot-msg user">
-                  Movie: Leo, 2 VIP tickets at 7:30 PM.
-                </div>
-                <div className="bot-msg bot highlight">
-                  ✅ Your booking request:
-                  <br />
-                  • Movie: Leo
-                  <br />
-                  • Class: VIP
-                  <br />
-                  • 2 Tickets, 7:30 PM
-                  <br />
-                  We&apos;ll confirm shortly. Thank you! 🙌
-                </div>
-              </div>
+          {/* BOT CARD */}
+          <article className="info-card bot-card">
+            <div className="info-image bot-preview-img">
+              <img
+                src="https://i.pinimg.com/564x/5b/6b/2d/5b6b2d66d5fd1bf5986ee3d73e6e0b6e.jpg"
+                alt="Chatbot / technology illustration"
+              />
             </div>
-          </div>
-        </div>
-      </section>
+            <div className="info-body">
+              <h2>🤖 SalesIQ Smart Bot</h2>
+              <p>
+                Full booking logic <strong>bot la</strong> irukkum – site just
+                clear explanation + images tha:
+              </p>
+              <ul>
+                <li>Theatre + Turf options in one bot</li>
+                <li>Step-by-step questions (Tamil / English)</li>
+                <li>Summary message with all details</li>
+                <li>Later payment / confirmation add panlaam</li>
+              </ul>
+              <button className="btn-primary" onClick={openSalesIQ}>
+                Start Chat Now
+              </button>
+            </div>
+          </article>
+        </section>
+      </main>
 
-      {/* FLOATING BOT BUTTON (for SalesIQ) */}
-      <button
-        className="floating-bot-btn"
-        onClick={() => scrollToSection("bot-section")}
-      >
+      {/* FLOAT BOT BUTTON */}
+      <button className="float-bot" onClick={openSalesIQ}>
         🤖
       </button>
 
-      {/* FOOTER */}
       <footer className="footer">
-        <p>© {new Date().getFullYear()} Moonlight Mahal. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Moonlight Mahal • Theatre & Turf</p>
         <p className="footer-sub">
-          Designed for clear <strong>Theatre & Turf</strong> bookings with Zoho
-          SalesIQ.
+          Google images + animated lights for clear, modern booking UI.
         </p>
       </footer>
     </div>
   );
-}
+};
 
 export default App;
