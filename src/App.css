@@ -14,7 +14,7 @@ body {
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
-  background: radial-gradient(circle at top, #e0f2fe 0, #f9fafb 40%, #eef2ff);
+  background: #ffffff; /* pure white */
   color: #0f172a;
 }
 
@@ -27,7 +27,7 @@ body {
 .welcome-overlay {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at top, #e0f2fe 0, #f9fafb 40%, #eef2ff);
+  background: radial-gradient(circle at top, #e0f2fe 0, #ffffff 55%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -157,7 +157,7 @@ body {
   animation: navBlink 0.55s ease-out 1;
 }
 
-/* mobile menu button */
+/* mobile nav button */
 
 .nav-menu-btn {
   display: none;
@@ -176,6 +176,7 @@ body {
 
 .hero {
   padding: 2.2rem 1.6rem 3rem;
+  background: linear-gradient(180deg, #e0f2fe 0, #ffffff 40%);
 }
 
 .hero-content {
@@ -203,75 +204,49 @@ body {
   line-height: 1.7;
 }
 
-/* SLIDER ROW */
+/* SLIDER – SINGLE WINDOW */
 
 .slider-row {
   max-width: 960px;
   margin: 2rem auto 0;
-}
-
-.slider-track {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(220px, 1fr);
-  gap: 1rem;
-  overflow: hidden;
-}
-
-/* Elevated card + diamond effect (light) */
-
-.elevated-card {
   position: relative;
-  overflow: hidden;
+  padding: 1rem 0 0.5rem;
 }
 
-.elevated-card::before {
-  content: "";
+.slider-row-glow {
   position: absolute;
-  inset: -40%;
+  inset: -30px 10%;
   background: radial-gradient(
-    circle at center,
-    rgba(59, 130, 246, 0.16),
-    transparent 60%
+    circle at top,
+    rgba(56, 189, 248, 0.18),
+    transparent 65%
   );
-  transform: translate(-120%, 120%) rotate(35deg);
-  opacity: 0;
-  transition: transform 0.35s ease, opacity 0.35s ease;
+  filter: blur(2px);
+  animation: skyGlow 6s ease-in-out infinite alternate;
   pointer-events: none;
 }
 
-.elevated-card:hover::before {
-  opacity: 1;
-  transform: translate(10%, -10%) rotate(35deg);
-}
-
-/* each slide */
-
-.slide-card {
+.single-slide {
+  position: relative;
+  margin: 0 auto;
+  max-width: 720px;
   background: #ffffff;
-  border-radius: 1rem;
+  border-radius: 1.2rem;
   border: 1px solid rgba(148, 163, 184, 0.4);
-  padding: 0.75rem;
-  transform: perspective(900px) rotateY(-18deg);
-  opacity: 0.5;
-  transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 16px 40px rgba(148, 163, 184, 0.38);
+  padding: 0.9rem;
 }
 
-.slide-card-active {
-  transform: perspective(900px) rotateY(0deg) translateY(-4px);
-  opacity: 1;
-  box-shadow: 0 18px 40px rgba(148, 163, 184, 0.55);
-}
-
-.slide-image {
-  border-radius: 0.8rem;
+.single-slide .slide-image {
+  border-radius: 0.9rem;
   overflow: hidden;
 }
 
-.slide-image img {
+.single-slide .slide-image img {
   width: 100%;
-  height: 170px;
+  height: 260px;
   object-fit: cover;
+  display: block;
 }
 
 .slide-caption {
@@ -287,7 +262,7 @@ body {
 
 .slide-caption h3 {
   margin: 0.15rem 0 0;
-  font-size: 0.95rem;
+  font-size: 0.98rem;
 }
 
 .slider-dots {
@@ -330,7 +305,34 @@ body {
   line-height: 1.7;
 }
 
-/* ABOUT – LIGHT VERSION */
+/* Generic elevated card + diamond effect (light) */
+
+.elevated-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.elevated-card::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(
+    circle at center,
+    rgba(59, 130, 246, 0.15),
+    transparent 60%
+  );
+  transform: translate(-120%, 120%) rotate(35deg);
+  opacity: 0;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.elevated-card:hover::before {
+  opacity: 1;
+  transform: translate(10%, -10%) rotate(35deg);
+}
+
+/* ABOUT */
 
 .about-grid {
   display: grid;
@@ -492,7 +494,7 @@ body {
   box-shadow: 0 10px 26px rgba(148, 163, 184, 0.45);
 }
 
-/* Social pills reuse */
+/* Social pills */
 
 .social-pill {
   background: #ffffff;
@@ -690,6 +692,17 @@ textarea {
   }
 }
 
+@keyframes skyGlow {
+  0% {
+    transform: translateY(0);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(15px);
+    opacity: 0.4;
+  }
+}
+
 /* RESPONSIVE */
 
 @media (max-width: 900px) {
@@ -706,13 +719,17 @@ textarea {
     flex-direction: column;
     gap: 0.4rem;
     padding: 0.6rem 1.6rem 0.8rem;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     border-bottom: 1px solid rgba(148, 163, 184, 0.4);
     backdrop-filter: blur(10px);
   }
 
   .mobile-menu .nav-btn {
     padding-left: 0;
+  }
+
+  .single-slide .slide-image img {
+    height: 220px;
   }
 
   .floating-bot {
