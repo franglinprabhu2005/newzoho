@@ -226,7 +226,7 @@ const App = () => {
           <div className="about-grid">
             {/* Theatre */}
             <article className="about-card elevated-card">
-              <div className="about-image">
+              <div className="about-top-image">
                 <img
                   src="https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg"
                   alt="Theatre hall"
@@ -250,7 +250,7 @@ const App = () => {
 
             {/* Turf */}
             <article className="about-card elevated-card">
-              <div className="about-image">
+              <div className="about-top-image">
                 <img
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s"
                   alt="Turf ground"
