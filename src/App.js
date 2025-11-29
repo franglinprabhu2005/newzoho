@@ -6,21 +6,21 @@ const sliderItems = [
     id: 0,
     label: "Neesmu Mahal",
     title: "Royal Mahal Entrance",
-    subtitle: "Perfect for weddings & events",
+    subtitle: "Perfect for weddings, receptions and events.",
     img: "https://i.pinimg.com/736x/70/ee/9d/70ee9dc93bc4916f57bcab3a719b5185.jpg",
   },
   {
     id: 1,
     label: "Mini Theatre",
     title: "Premium Movie Experience",
-    subtitle: "Comfort seats, HD screen & sound",
+    subtitle: "Comfortable seating, HD screen and clear sound.",
     img: "https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg",
   },
   {
     id: 2,
     label: "Turf Ground",
     title: "All Sports Friendly Turf",
-    subtitle: "Football, cricket & practice sessions",
+    subtitle: "Football, cricket and practice sessions under lights.",
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s",
   },
 ];
@@ -63,7 +63,7 @@ const App = () => {
           </div>
         </div>
 
-        {/* Desktop links */}
+        {/* Desktop nav */}
         <nav className="nav-links nav-links-desktop">
           <button onClick={() => scrollTo("home")}>Home</button>
           <button onClick={() => scrollTo("about")}>About</button>
@@ -71,10 +71,10 @@ const App = () => {
           <button onClick={() => scrollTo("contact")}>Contact</button>
         </nav>
 
-        {/* Mobile hamburger */}
+        {/* Mobile menu icon */}
         <button
           className="nav-menu-btn"
-          onClick={() => setMobileMenuOpen((prev) => !prev)}
+          onClick={() => setMobileMenuOpen((p) => !p)}
           aria-label="Toggle navigation"
         >
           ☰
@@ -85,7 +85,7 @@ const App = () => {
         </button>
       </header>
 
-      {/* Mobile dropdown menu */}
+      {/* Mobile dropdown */}
       {mobileMenuOpen && (
         <div className="mobile-menu">
           <button onClick={() => scrollTo("home")}>Home</button>
@@ -96,22 +96,23 @@ const App = () => {
       )}
 
       <main>
-        {/* HOME / HERO */}
+        {/* HOME – CENTER HERO + SLIDER */}
         <section id="home" className="hero">
-          <div className="hero-left">
-            <p className="hero-chip">Royal • Dark • Bot Powered</p>
+          <div className="hero-inner">
+            <p className="hero-chip">Neesmu Mahal • Dark simple UI</p>
             <h1>
-              <span className="hero-highlight">Neesmu Mahal</span>
+              <span className="hero-highlight">Theatre & Turf booking</span>
               <br />
-              Theatre & Turf booking, bot mooliya thelivaa.
+              bot mooliya thelivaa.
             </h1>
             <p className="hero-text">
-              Neesmu Mahal is a modern space with a{" "}
+              Neesmu Mahal is a modern venue with a{" "}
               <strong>premium mini-theatre</strong> and a{" "}
-              <strong>multi-sport turf ground</strong>. All bookings are handled
-              only via our <strong>Smart Booking Bot</strong>. This website
-              explains everything in a clean, simple way.
+              <strong>multi-sport turf ground</strong>. All bookings happen only
+              inside the <strong>Smart Booking Bot</strong>. This website
+              simply explains the steps in a clean way.
             </p>
+
             <div className="hero-actions">
               <button className="btn-primary" onClick={openBot}>
                 Start Booking in Bot
@@ -120,26 +121,25 @@ const App = () => {
                 className="btn-ghost"
                 onClick={() => scrollTo("about")}
               >
-                Know more about Mahal
+                See Mahal details
               </button>
             </div>
+
             <div className="hero-tags">
               <span>Mobile • Tablet • PC</span>
-              <span>Clean Dark UI</span>
-              <span>Bot Based Booking</span>
+              <span>Dark & simple</span>
+              <span>Bot based booking</span>
             </div>
-          </div>
 
-          {/* SLIDER – RIGHT SIDE, CENTERED */}
-          <div className="hero-right">
-            <div className="slider-card">
+            {/* Slider center */}
+            <div className="slider">
               <div className="slider-image">
                 <img
                   src={sliderItems[current].img}
                   alt={sliderItems[current].label}
                 />
               </div>
-              <div className="slider-text">
+              <div className="slider-caption">
                 <span className="slider-label">
                   {sliderItems[current].label}
                 </span>
@@ -150,9 +150,7 @@ const App = () => {
                 {sliderItems.map((item, idx) => (
                   <button
                     key={item.id}
-                    className={
-                      idx === current ? "dot dot-active" : "dot"
-                    }
+                    className={idx === current ? "dot dot-active" : "dot"}
                     onClick={() => goTo(idx)}
                   />
                 ))}
@@ -161,75 +159,71 @@ const App = () => {
           </div>
         </section>
 
-        {/* ABOUT */}
+        {/* ABOUT SECTION */}
         <section id="about" className="section">
           <h2 className="section-title">About Neesmu Mahal</h2>
           <p className="section-desc">
-            Neesmu Mahal is a <strong>simple and royal</strong> venue for both
-            movies and games. We have a <strong>mini theatre</strong> for all
-            types of films and a <strong>turf ground</strong> for multiple
-            sports. Users see this site, understand the flow, and then finish
-            booking through the Smart Booking Bot.
+            Neesmu Mahal is a <strong>simple and royal</strong> venue in Sivakasi
+            with two main facilities – a <strong>mini theatre</strong> for
+            movies and a <strong>turf ground</strong> for games. Users first
+            see the details here and then finish booking through the Smart
+            Booking Bot.
           </p>
 
-          <div className="about-grid">
-            {/* Theatre */}
-            <article className="info-card">
-              <div className="wide-image">
-                <img
-                  src="https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg"
-                  alt="Theatre hall"
-                />
-              </div>
-              <div className="card-body">
-                <h3>Mini Theatre – All Types of Movies</h3>
-                <p>
-                  Our theatre supports <strong>all movie types</strong> – Tamil,
-                  English, Hindi and special shows with HD projection and clear
-                  sound.
-                </p>
-                <ul>
-                  <li>Latest releases & classic shows</li>
-                  <li>Trailer & basic info shown inside the bot</li>
-                  <li>VIP / Balcony / Regular seating options</li>
-                  <li>Private screenings for groups</li>
-                </ul>
-              </div>
-            </article>
+          <div className="about-card">
+            <div className="about-image">
+              <img
+                src="https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg"
+                alt="Theatre hall"
+              />
+            </div>
+            <div className="about-content">
+              <h3>Mini Theatre – All Types of Movies</h3>
+              <p>
+                The mini theatre supports <strong>all movie types</strong> –
+                Tamil, English, Hindi and special fan shows with HD screen and
+                powerful sound.
+              </p>
+              <ul>
+                <li>Latest releases & classic movies</li>
+                <li>Trailer links & basic info shown in the bot</li>
+                <li>VIP / Balcony / Regular seating classes</li>
+                <li>Private group screenings for family & friends</li>
+              </ul>
+            </div>
+          </div>
 
-            {/* Turf */}
-            <article className="info-card">
-              <div className="wide-image">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s"
-                  alt="Turf ground"
-                />
-              </div>
-              <div className="card-body">
-                <h3>Turf Ground – All Types of Games</h3>
-                <p>
-                  The turf area is ideal for <strong>football</strong>,{" "}
-                  <strong>cricket</strong>, <strong>box cricket</strong>, fitness
-                  drills and friendly tournaments, including night matches.
-                </p>
-                <ul>
-                  <li>Football 5s / 7s matches</li>
-                  <li>Cricket & box-cricket practice</li>
-                  <li>Evening & night sessions under lights</li>
-                  <li>College, school & office events</li>
-                </ul>
-              </div>
-            </article>
+          <div className="about-card">
+            <div className="about-image">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s"
+                alt="Turf ground"
+              />
+            </div>
+            <div className="about-content">
+              <h3>Turf Ground – All Types of Games</h3>
+              <p>
+                The turf space is perfect for <strong>football</strong>,{" "}
+                <strong>cricket</strong>, <strong>box cricket</strong>, fitness
+                drills and friendly tournaments, including night matches.
+              </p>
+              <ul>
+                <li>Football 5s / 7s friendly matches</li>
+                <li>Cricket & box-cricket practice</li>
+                <li>Evening & night sessions under lights</li>
+                <li>College, school & office events</li>
+              </ul>
+            </div>
           </div>
         </section>
 
-        {/* SERVICES */}
+        {/* SERVICES SECTION */}
         <section id="services" className="section">
           <h2 className="section-title">Our Services</h2>
           <p className="section-desc">
-            Booking for both theatre and turf happens{" "}
-            <strong>only via the Smart Booking Bot</strong>. This website will
-            never ask for payment or seat details – everything goes through
+            Both <strong>Theatre</strong> and <strong>Turf</strong> bookings are
+            done <strong>only via the Smart Booking Bot</strong>. This website
+            will not take payments or seat details – everything happens in the
             chat.
           </p>
 
@@ -237,14 +231,14 @@ const App = () => {
             <div className="service-card">
               <h3>🎬 Theatre Booking (via Bot)</h3>
               <p>
-                Ticket booking is done inside the Smart Booking Bot. The user
-                answers simple questions and gets a clear summary.
+                Ticket booking is handled inside the Smart Booking Bot with
+                simple step-by-step questions.
               </p>
               <ul>
-                <li>Choose “Theatre Booking” in the bot</li>
-                <li>View movies & show timings</li>
-                <li>Select date, time, class & ticket count</li>
-                <li>Receive booking summary in chat</li>
+                <li>Select “Theatre Booking” option in the bot</li>
+                <li>See movie list, show timings & basic details</li>
+                <li>Choose date, time, class & ticket count</li>
+                <li>Get a clean booking summary in chat</li>
               </ul>
               <button className="btn-outline" onClick={openBot}>
                 Open Bot for Theatre
@@ -254,14 +248,14 @@ const App = () => {
             <div className="service-card">
               <h3>⚽ Turf Booking (via Bot)</h3>
               <p>
-                Turf slot booking is also inside the bot, so timing and player
-                details are always correct.
+                Turf slot booking is also done in the bot to avoid confusion on
+                time and player count.
               </p>
               <ul>
-                <li>Select “Turf Booking” in the bot</li>
+                <li>Select “Turf Booking” option in the bot</li>
                 <li>Choose game type (football / cricket etc.)</li>
                 <li>Pick date, time slot and players count</li>
-                <li>Confirm slot from bot summary</li>
+                <li>Confirm from the final summary message</li>
               </ul>
               <button className="btn-outline" onClick={openBot}>
                 Open Bot for Turf
@@ -270,12 +264,12 @@ const App = () => {
           </div>
         </section>
 
-        {/* CONTACT */}
+        {/* CONTACT SECTION */}
         <section id="contact" className="section">
           <h2 className="section-title">Contact Neesmu Mahal</h2>
           <p className="section-desc">
-            For doubts about shows or turf availability, contact us directly.
-            For final booking details, always trust the Smart Booking Bot.
+            For show details or turf availability, contact us using the details
+            below. Booking confirmation always comes from the Smart Booking Bot.
           </p>
 
           <div className="contact-grid">
@@ -303,7 +297,7 @@ const App = () => {
 
             <div className="contact-card">
               <h3>Social Media</h3>
-              <p>Follow & message us any time.</p>
+              <p>Follow and message us any time.</p>
               <div className="social-row">
                 <div className="social-icon">f</div>
                 <div className="social-icon">IG</div>
@@ -337,7 +331,7 @@ const App = () => {
           </div>
         </div>
         <p className="footer-sub">
-          Clean dark design • Auto sliding images • Booking only via Smart
+          Clean dark layout • Auto sliding images • Booking only via Smart
           Booking Bot.
         </p>
       </footer>
