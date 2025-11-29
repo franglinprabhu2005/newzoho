@@ -73,6 +73,8 @@ const App = () => {
   const navBtnClass = (id) =>
     `nav-btn ${activeSection === id ? "nav-btn-active" : ""}`;
 
+  const activeSlide = sliderItems[current];
+
   return (
     <div className="site-root">
       {/* FLOWER WELCOME OVERLAY */}
@@ -176,30 +178,18 @@ const App = () => {
             </p>
           </div>
 
-          {/* FLIP SLIDER */}
+          {/* SINGLE SLIDE WINDOW */}
           <div className="slider-row">
-            <div className="slider-track">
-              {sliderItems.map((item, index) => {
-                const isActive = index === current;
-                return (
-                  <div
-                    key={item.id}
-                    className={
-                      "slide-card elevated-card" +
-                      (isActive ? " slide-card-active" : "")
-                    }
-                  >
-                    <div className="slide-image">
-                      <img src={item.img} alt={item.label} />
-                    </div>
-                    <div className="slide-caption">
-                      <span>{item.label}</span>
-                      <h3>{item.title}</h3>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            <div className="slider-row-glow" />
+            <article className="single-slide elevated-card">
+              <div className="slide-image">
+                <img src={activeSlide.img} alt={activeSlide.label} />
+              </div>
+              <div className="slide-caption">
+                <span>{activeSlide.label}</span>
+                <h3>{activeSlide.title}</h3>
+              </div>
+            </article>
 
             <div className="slider-dots">
               {sliderItems.map((s, i) => (
@@ -213,7 +203,7 @@ const App = () => {
           </div>
         </section>
 
-        {/* ABOUT (light theme version you asked) */}
+        {/* ABOUT */}
         <section id="about" className="section">
           <h2 className="section-title">About the Theatre & Turf</h2>
           <p className="section-desc">
@@ -372,7 +362,7 @@ const App = () => {
           </div>
         </section>
 
-        {/* FEEDBACK (no nav item) */}
+        {/* FEEDBACK */}
         <section id="feedback" className="section">
           <h2 className="section-title">User Feedback</h2>
           <p className="section-desc">
@@ -432,7 +422,7 @@ const App = () => {
           <li>Explains Neesmu Mall theatre & turf in simple steps.</li>
           <li>Shows how Neesmu Smart Booking Bot handles bookings.</li>
           <li>Responsive layout for mobile, tablet and desktop.</li>
-          <li>Flip style image slider with mall, movie & turf photos.</li>
+          <li>Single window slider with mall, movie & turf photos.</li>
           <li>Floating bot shortcut & user feedback section.</li>
         </ul>
         <p className="footer-copy">
