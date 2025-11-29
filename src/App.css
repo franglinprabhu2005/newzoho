@@ -68,29 +68,12 @@ body {
   animation: flowerFall 2.6s linear infinite;
 }
 
-.f1 {
-  left: 5%;
-}
-.f2 {
-  left: 20%;
-  animation-delay: 0.2s;
-}
-.f3 {
-  left: 40%;
-  animation-delay: 0.4s;
-}
-.f4 {
-  left: 60%;
-  animation-delay: 0.6s;
-}
-.f5 {
-  left: 80%;
-  animation-delay: 0.8s;
-}
-.f6 {
-  left: 92%;
-  animation-delay: 1s;
-}
+.f1 { left: 5%; }
+.f2 { left: 20%; animation-delay: 0.2s; }
+.f3 { left: 40%; animation-delay: 0.4s; }
+.f4 { left: 60%; animation-delay: 0.6s; }
+.f5 { left: 80%; animation-delay: 0.8s; }
+.f6 { left: 92%; animation-delay: 1s; }
 
 /* NAVBAR – DARK */
 
@@ -231,7 +214,7 @@ body {
   border: 1px solid rgba(148, 163, 184, 0.7);
 }
 
-/* SINGLE WINDOW SLIDER – DARK + RUNNING LIGHT */
+/* SINGLE WINDOW SLIDER */
 
 .slider-row {
   max-width: 960px;
@@ -263,6 +246,7 @@ body {
   box-shadow: 0 20px 48px rgba(0, 0, 0, 0.9);
   padding: 0.9rem;
   overflow: hidden;
+  z-index: 0; /* important for border-runner */
 }
 
 .slide-image {
@@ -326,35 +310,28 @@ body {
   transform: scale(1.4);
 }
 
-/* Running light border around slider */
+/* 👉 RUNNING LIGHT BORDER ONLY ON FRAME */
 
 .border-runner {
   position: absolute;
-  inset: 0;
+  inset: -2px;               /* slightly outside card */
   border-radius: inherit;
   pointer-events: none;
-}
-
-.border-runner::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  background: conic-gradient(
-    from 0deg,
-    #22d3ee,
-    #22c55e,
-    #f97316,
-    #a855f7,
-    #22d3ee
-  );
+  z-index: -1;               /* behind card content */
   padding: 2px;
-  -webkit-mask: linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  background:
+    linear-gradient(#020617, #020617) padding-box,
+    conic-gradient(
+      from 0deg,
+      #22d3ee,
+      #22c55e,
+      #f97316,
+      #a855f7,
+      #22d3ee
+    ) border-box;
+  -webkit-background-clip: padding-box, border-box;
+  background-clip: padding-box, border-box;
   animation: borderRotate 7s linear infinite;
-  opacity: 0.9;
 }
 
 /* COMMON SECTION */
@@ -486,8 +463,6 @@ body {
     background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
-/* outline buttons */
-
 .btn-outline {
   background: transparent;
   border: 1px solid rgba(148, 163, 184, 0.9);
@@ -501,7 +476,7 @@ body {
   box-shadow: 0 10px 26px rgba(34, 211, 238, 0.4);
 }
 
-/* primary button (feedback) */
+/* primary (feedback) */
 
 .btn-primary {
   background: linear-gradient(90deg, #6366f1, #22d3ee);
@@ -741,10 +716,6 @@ textarea {
     padding: 0.6rem 1.6rem 0.8rem;
     background: rgba(3, 7, 18, 0.97);
     border-bottom: 1px solid rgba(56, 189, 248, 0.35);
-  }
-
-  .mobile-menu .nav-btn {
-    padding-left: 0;
   }
 
   .single-slide .slide-image img {
