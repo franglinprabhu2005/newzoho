@@ -1,47 +1,49 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
+// -------- DATA ---------
+
 const sliderItems = [
   {
     id: 0,
-    label: "Neesmu Mahal",
-    title: "Royal Mahal Entrance",
-    subtitle: "Perfect for weddings, receptions and events.",
-    img: "https://i.pinimg.com/736x/70/ee/9d/70ee9dc93bc4916f57bcab3a719b5185.jpg",
+    label: "Neesmu Mall",
+    title: "Welcome to Neesmu Mall",
+    img: "https://i.pinimg.com/736x/70/ee/9d/70ee9dc93bc4916f57bcab3a719b5185.jpg", // mall front
   },
   {
     id: 1,
-    label: "Mini Theatre",
-    title: "Premium Movie Experience",
-    subtitle: "Comfortable seating, HD screen and clear sound.",
-    img: "https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg",
+    label: "Now Showing",
+    title: "Cinema Experience",
+    img: "https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg", // theatre
   },
   {
     id: 2,
+    label: "Movie Poster",
+    title: "Big Screen Fun",
+    img: "https://m.media-amazon.com/images/I/71niXI3lxlL._AC_UF894,1000_QL80_.jpg", // sample poster
+  },
+  {
+    id: 3,
     label: "Turf Ground",
-    title: "All Sports Friendly Turf",
-    subtitle: "Football, cricket and practice sessions under lights.",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s",
+    title: "All Sports Turf",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s", // turf
   },
 ];
+
+// -------- COMPONENT ---------
 
 const App = () => {
   const [current, setCurrent] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const openBot = () => {
-    alert("Booking only via Smart Booking Bot (integration coming soon).");
-  };
-
+  // auto slide
   useEffect(() => {
     const id = setInterval(
       () => setCurrent((prev) => (prev + 1) % sliderItems.length),
-      5000
+      3500
     );
     return () => clearInterval(id);
   }, []);
-
-  const goTo = (i) => setCurrent(i);
 
   const scrollTo = (id) => {
     const el = document.getElementById(id);
@@ -51,19 +53,19 @@ const App = () => {
     }
   };
 
+  const openBot = () => {
+    alert("Booking only via Neesmu Smart Booking Bot (SalesIQ bot integration).");
+  };
+
   return (
     <div className="site-root">
       {/* NAVBAR */}
       <header className="nav">
         <div className="nav-left">
           <div className="logo-orb">N</div>
-          <div className="logo-text">
-            <span className="logo-title">Neesmu Mahal</span>
-            <span className="logo-sub">Theatre • Turf • Events</span>
-          </div>
+          <span className="logo-title">Neesmu Mall</span>
         </div>
 
-        {/* Desktop nav */}
         <nav className="nav-links nav-links-desktop">
           <button onClick={() => scrollTo("home")}>Home</button>
           <button onClick={() => scrollTo("about")}>About</button>
@@ -71,21 +73,14 @@ const App = () => {
           <button onClick={() => scrollTo("contact")}>Contact</button>
         </nav>
 
-        {/* Mobile menu icon */}
         <button
           className="nav-menu-btn"
-          onClick={() => setMobileMenuOpen((p) => !p)}
-          aria-label="Toggle navigation"
+          onClick={() => setMobileMenuOpen((v) => !v)}
         >
           ☰
         </button>
-
-        <button className="nav-cta" onClick={openBot}>
-          Smart Booking Bot
-        </button>
       </header>
 
-      {/* Mobile dropdown */}
       {mobileMenuOpen && (
         <div className="mobile-menu">
           <button onClick={() => scrollTo("home")}>Home</button>
@@ -96,243 +91,245 @@ const App = () => {
       )}
 
       <main>
-        {/* HOME – CENTER HERO + SLIDER */}
+        {/* HOME */}
         <section id="home" className="hero">
-          <div className="hero-inner">
-            <p className="hero-chip">Neesmu Mahal • Dark simple UI</p>
+          <div className="hero-content">
             <h1>
-              <span className="hero-highlight">Theatre & Turf booking</span>
-              <br />
-              bot mooliya thelivaa.
+              <span className="hero-highlight">Neesmu Mall</span>
             </h1>
+            <p className="hero-sub">
+              Theatre & Turf inside one modern mall.
+            </p>
             <p className="hero-text">
-              Neesmu Mahal is a modern venue with a{" "}
-              <strong>premium mini-theatre</strong> and a{" "}
-              <strong>multi-sport turf ground</strong>. All bookings happen only
-              inside the <strong>Smart Booking Bot</strong>. This website
-              simply explains the steps in a clean way.
+              Neesmu Mall is an entertainment spot with a{" "}
+              <strong>cinema style theatre</strong> and a{" "}
+              <strong>green turf ground</strong>. Users don&apos;t book from
+              this website. This site only shows clear steps. Real booking for{" "}
+              <strong>movies and turf slots</strong> happens through the{" "}
+              <strong>Neesmu Smart Booking Bot</strong>.
             </p>
 
-            <div className="hero-actions">
-              <button className="btn-primary" onClick={openBot}>
-                Start Booking in Bot
-              </button>
-              <button
-                className="btn-ghost"
-                onClick={() => scrollTo("about")}
-              >
-                See Mahal details
-              </button>
-            </div>
-
             <div className="hero-tags">
-              <span>Mobile • Tablet • PC</span>
-              <span>Dark & simple</span>
+              <span>Theatre + Turf in one place</span>
               <span>Bot based booking</span>
+              <span>Mobile friendly site</span>
+            </div>
+          </div>
+
+          {/* FLIP SLIDER */}
+          <div className="slider-row">
+            <div className="slider-track">
+              {sliderItems.map((item, index) => {
+                const isActive = index === current;
+                return (
+                  <div
+                    key={item.id}
+                    className={
+                      "slide-card" + (isActive ? " slide-card-active" : "")
+                    }
+                  >
+                    <div className="slide-image">
+                      <img src={item.img} alt={item.label} />
+                    </div>
+                    <div className="slide-caption">
+                      <span>{item.label}</span>
+                      <h3>{item.title}</h3>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
 
-            {/* Slider center */}
-            <div className="slider">
-              <div className="slider-image">
-                <img
-                  src={sliderItems[current].img}
-                  alt={sliderItems[current].label}
+            <div className="slider-dots">
+              {sliderItems.map((s, i) => (
+                <button
+                  key={s.id}
+                  className={i === current ? "dot dot-active" : "dot"}
+                  onClick={() => setCurrent(i)}
                 />
-              </div>
-              <div className="slider-caption">
-                <span className="slider-label">
-                  {sliderItems[current].label}
-                </span>
-                <h3>{sliderItems[current].title}</h3>
-                <p>{sliderItems[current].subtitle}</p>
-              </div>
-              <div className="slider-dots">
-                {sliderItems.map((item, idx) => (
-                  <button
-                    key={item.id}
-                    className={idx === current ? "dot dot-active" : "dot"}
-                    onClick={() => goTo(idx)}
-                  />
-                ))}
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* ABOUT SECTION */}
+        {/* ABOUT */}
         <section id="about" className="section">
-          <h2 className="section-title">About Neesmu Mahal</h2>
+          <h2 className="section-title">About the Theatre & Turf</h2>
           <p className="section-desc">
-            Neesmu Mahal is a <strong>simple and royal</strong> venue in Sivakasi
-            with two main facilities – a <strong>mini theatre</strong> for
-            movies and a <strong>turf ground</strong> for games. Users first
-            see the details here and then finish booking through the Smart
-            Booking Bot.
+            Neesmu Mall has two main zones – a{" "}
+            <strong>movie theatre</strong> and a{"strong"> multi-sport turf
+            ground</strong>. Both are designed for friends, family and team
+            outings.
           </p>
 
-          <div className="about-card">
-            <div className="about-image">
-              <img
-                src="https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg"
-                alt="Theatre hall"
-              />
-            </div>
-            <div className="about-content">
-              <h3>Mini Theatre – All Types of Movies</h3>
-              <p>
-                The mini theatre supports <strong>all movie types</strong> –
-                Tamil, English, Hindi and special fan shows with HD screen and
-                powerful sound.
-              </p>
-              <ul>
-                <li>Latest releases & classic movies</li>
-                <li>Trailer links & basic info shown in the bot</li>
-                <li>VIP / Balcony / Regular seating classes</li>
-                <li>Private group screenings for family & friends</li>
-              </ul>
-            </div>
-          </div>
+          <div className="about-grid">
+            {/* Theatre */}
+            <article className="about-card">
+              <div className="about-image">
+                <img
+                  src="https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg"
+                  alt="Theatre hall"
+                />
+              </div>
+              <div className="about-body">
+                <h3>Theatre – All Type of Movies</h3>
+                <p>
+                  The Neesmu theatre supports{" "}
+                  <strong>all kinds of movies</strong> – Tamil, English, Hindi,
+                  kids movies and special fan shows.
+                </p>
+                <ul>
+                  <li>Big screen, surround sound, comfy seats</li>
+                  <li>New releases, re–runs & private shows</li>
+                  <li>Morning, matinee, evening & night shows</li>
+                  <li>Best for birthdays, bachelor shows, group hangouts</li>
+                </ul>
+              </div>
+            </article>
 
-          <div className="about-card">
-            <div className="about-image">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s"
-                alt="Turf ground"
-              />
-            </div>
-            <div className="about-content">
-              <h3>Turf Ground – All Types of Games</h3>
-              <p>
-                The turf space is perfect for <strong>football</strong>,{" "}
-                <strong>cricket</strong>, <strong>box cricket</strong>, fitness
-                drills and friendly tournaments, including night matches.
-              </p>
-              <ul>
-                <li>Football 5s / 7s friendly matches</li>
-                <li>Cricket & box-cricket practice</li>
-                <li>Evening & night sessions under lights</li>
-                <li>College, school & office events</li>
-              </ul>
-            </div>
+            {/* Turf */}
+            <article className="about-card">
+              <div className="about-image">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s"
+                  alt="Turf ground"
+                />
+              </div>
+              <div className="about-body">
+                <h3>Turf – All Type of Games</h3>
+                <p>
+                  The Neesmu turf is built for{" "}
+                  <strong>football, cricket, box-cricket</strong> and fun games
+                  with friends.
+                </p>
+                <ul>
+                  <li>Football 5s / 7s matches & practice</li>
+                  <li>Cricket & box-cricket nets style play</li>
+                  <li>Evening / night slots with lights</li>
+                  <li>Suitable for college & office tournaments</li>
+                </ul>
+              </div>
+            </article>
           </div>
         </section>
 
-        {/* SERVICES SECTION */}
+        {/* SERVICES – BOT FLOW */}
         <section id="services" className="section">
-          <h2 className="section-title">Our Services</h2>
+          <h2 className="section-title">How Booking Works (Via Bot)</h2>
           <p className="section-desc">
-            Both <strong>Theatre</strong> and <strong>Turf</strong> bookings are
-            done <strong>only via the Smart Booking Bot</strong>. This website
-            will not take payments or seat details – everything happens in the
-            chat.
+            Neesmu Mall bookings are done{" "}
+            <strong>only through the Neesmu Smart Booking Bot</strong>. This
+            site does not show any form or payment. Below cards explain how the
+            bot will talk with the user.
           </p>
 
           <div className="service-grid">
-            <div className="service-card">
-              <h3>🎬 Theatre Booking (via Bot)</h3>
+            {/* Theatre booking */}
+            <article className="service-card">
+              <h3>🎬 Theatre Booking – Bot Flow</h3>
               <p>
-                Ticket booking is handled inside the Smart Booking Bot with
-                simple step-by-step questions.
+                User selects <strong>“Theatre Booking”</strong> inside the bot.
               </p>
               <ul>
-                <li>Select “Theatre Booking” option in the bot</li>
-                <li>See movie list, show timings & basic details</li>
-                <li>Choose date, time, class & ticket count</li>
-                <li>Get a clean booking summary in chat</li>
+                <li>Bot shows movie list & basic poster.</li>
+                <li>Asks for date & show time (morning / matinee / night).</li>
+                <li>Asks for class (VIP / Balcony / Regular).</li>
+                <li>Asks how many tickets are needed.</li>
+                <li>
+                  Finally bot sends a summary message with all details for
+                  confirmation.
+                </li>
               </ul>
               <button className="btn-outline" onClick={openBot}>
                 Open Bot for Theatre
               </button>
-            </div>
+            </article>
 
-            <div className="service-card">
-              <h3>⚽ Turf Booking (via Bot)</h3>
+            {/* Turf booking */}
+            <article className="service-card">
+              <h3>⚽ Turf Booking – Bot Flow</h3>
               <p>
-                Turf slot booking is also done in the bot to avoid confusion on
-                time and player count.
+                User selects <strong>“Turf Booking”</strong> inside the bot.
               </p>
               <ul>
-                <li>Select “Turf Booking” option in the bot</li>
-                <li>Choose game type (football / cricket etc.)</li>
-                <li>Pick date, time slot and players count</li>
-                <li>Confirm from the final summary message</li>
+                <li>Bot asks which game – football, cricket, box-cricket.</li>
+                <li>Then asks for date & time slot.</li>
+                <li>Collects number of players joining.</li>
+                <li>
+                  Optionally takes notes (team name, friendly match details).
+                </li>
+                <li>
+                  Sends final slot summary & confirms booking inside the chat.
+                </li>
               </ul>
               <button className="btn-outline" onClick={openBot}>
                 Open Bot for Turf
               </button>
-            </div>
+            </article>
           </div>
         </section>
 
-        {/* CONTACT SECTION */}
+        {/* CONTACT */}
         <section id="contact" className="section">
-          <h2 className="section-title">Contact Neesmu Mahal</h2>
+          <h2 className="section-title">Contact Neesmu Mall</h2>
           <p className="section-desc">
-            For show details or turf availability, contact us using the details
-            below. Booking confirmation always comes from the Smart Booking Bot.
+            For general questions about the mall, theatre or turf, you can use
+            the details below. For booking confirmation, always trust the Smart
+            Booking Bot messages.
           </p>
 
           <div className="contact-grid">
             <div className="contact-card">
-              <h3>Venue Address</h3>
+              <h3>Address</h3>
               <p>
-                <strong>Neesmu Mahal</strong>
+                <strong>Neesmu Mall</strong>
                 <br />
                 45, Royal Street, Lakshmi Nagar
                 <br />
                 Sivakasi – 626123, Tamil Nadu
               </p>
 
-              <h3>Reach Us</h3>
+              <h3>Contact</h3>
               <p>
                 📞 <strong>+91 90876 54321</strong>
                 <br />
-                ✉️ <strong>neesmu.mahal@venue2025.com</strong>
-              </p>
-
-              <p className="handle">
-                Social handle: <strong>@neesumu2025</strong>
+                ✉️ <strong>info@neesmu-mall.com</strong>
               </p>
             </div>
 
             <div className="contact-card">
               <h3>Social Media</h3>
-              <p>Follow and message us any time.</p>
+              <p>Follow us and send a message any time:</p>
               <div className="social-row">
-                <div className="social-icon">f</div>
-                <div className="social-icon">IG</div>
-                <div className="social-icon">▶</div>
-                <div className="social-icon">WA</div>
-                <div className="social-icon">📍</div>
+                <button className="social-pill">📘 Facebook</button>
+                <button className="social-pill">📸 Instagram</button>
+                <button className="social-pill">▶ YouTube</button>
+                <button className="social-pill">💬 WhatsApp</button>
               </div>
-              <button className="btn-primary contact-btn" onClick={openBot}>
-                Chat in Smart Booking Bot
-              </button>
+              <p className="handle">
+                Official handle: <strong>@neesmuMall2025</strong>
+              </p>
             </div>
           </div>
         </section>
       </main>
 
-      {/* FLOATING BOT BUTTON */}
+      {/* FLOATING BOT ICON */}
       <button className="floating-bot" onClick={openBot}>
         🤖
       </button>
 
       {/* FOOTER */}
       <footer className="footer">
-        <div className="footer-top">
-          <span>© 2025 Neesmu Mahal. All rights reserved.</span>
-          <div className="footer-social">
-            <div className="social-icon small">f</div>
-            <div className="social-icon small">IG</div>
-            <div className="social-icon small">▶</div>
-            <div className="social-icon small">WA</div>
-            <div className="social-icon small">📍</div>
-          </div>
-        </div>
-        <p className="footer-sub">
-          Clean dark layout • Auto sliding images • Booking only via Smart
-          Booking Bot.
+        <p className="footer-title">Features of this site</p>
+        <ul className="footer-list">
+          <li>Clear explanation of Neesmu Mall theatre & turf.</li>
+          <li>Shows how Smart Booking Bot handles all bookings.</li>
+          <li>Responsive layout for mobile, tablet and desktop.</li>
+          <li>Flip style image slider with mall, movie & turf photos.</li>
+        </ul>
+        <p className="footer-copy">
+          © 2025 Neesmu Mall • Built as a bot–guide website.
         </p>
       </footer>
     </div>
