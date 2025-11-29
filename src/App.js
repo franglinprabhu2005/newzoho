@@ -27,12 +27,12 @@ const sliderItems = [
 
 const App = () => {
   const [current, setCurrent] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const openBot = () => {
     alert("Booking only via Smart Booking Bot (integration coming soon).");
   };
 
-  // auto slider
   useEffect(() => {
     const id = setInterval(
       () => setCurrent((prev) => (prev + 1) % sliderItems.length),
@@ -45,7 +45,10 @@ const App = () => {
 
   const scrollTo = (id) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      setMobileMenuOpen(false);
+    }
   };
 
   return (
@@ -59,16 +62,38 @@ const App = () => {
             <span className="logo-sub">Theatre • Turf • Events</span>
           </div>
         </div>
-        <nav className="nav-links">
+
+        {/* Desktop links */}
+        <nav className="nav-links nav-links-desktop">
           <button onClick={() => scrollTo("home")}>Home</button>
           <button onClick={() => scrollTo("about")}>About</button>
           <button onClick={() => scrollTo("services")}>Services</button>
           <button onClick={() => scrollTo("contact")}>Contact</button>
         </nav>
+
+        {/* Mobile hamburger */}
+        <button
+          className="nav-menu-btn"
+          onClick={() => setMobileMenuOpen((prev) => !prev)}
+          aria-label="Toggle navigation"
+        >
+          ☰
+        </button>
+
         <button className="nav-cta" onClick={openBot}>
-          Open Smart Booking Bot
+          Smart Booking Bot
         </button>
       </header>
+
+      {/* Mobile dropdown menu */}
+      {mobileMenuOpen && (
+        <div className="mobile-menu">
+          <button onClick={() => scrollTo("home")}>Home</button>
+          <button onClick={() => scrollTo("about")}>About</button>
+          <button onClick={() => scrollTo("services")}>Services</button>
+          <button onClick={() => scrollTo("contact")}>Contact</button>
+        </div>
+      )}
 
       <main>
         {/* HOME / HERO */}
@@ -84,8 +109,8 @@ const App = () => {
               Neesmu Mahal is a modern space with a{" "}
               <strong>premium mini-theatre</strong> and a{" "}
               <strong>multi-sport turf ground</strong>. All bookings are handled
-              only via our <strong>Smart Booking Bot</strong>. This website just
-              explains the options in a clear way.
+              only via our <strong>Smart Booking Bot</strong>. This website
+              explains everything in a clean, simple way.
             </p>
             <div className="hero-actions">
               <button className="btn-primary" onClick={openBot}>
@@ -100,12 +125,12 @@ const App = () => {
             </div>
             <div className="hero-tags">
               <span>Mobile • Tablet • PC</span>
-              <span>Simple Dark UI</span>
+              <span>Clean Dark UI</span>
               <span>Bot Based Booking</span>
             </div>
           </div>
 
-          {/* SLIDER (CENTER) */}
+          {/* SLIDER – RIGHT SIDE, CENTERED */}
           <div className="hero-right">
             <div className="slider-card">
               <div className="slider-image">
@@ -150,46 +175,50 @@ const App = () => {
           <div className="about-grid">
             {/* Theatre */}
             <article className="info-card">
-              <div className="square-image">
+              <div className="wide-image">
                 <img
                   src="https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg"
                   alt="Theatre hall"
                 />
               </div>
-              <h3>Mini Theatre – All Types of Movies</h3>
-              <p>
-                Our theatre supports <strong>all movie types</strong> – Tamil,
-                English, Hindi and special shows with HD projection and clear
-                sound.
-              </p>
-              <ul>
-                <li>Latest releases & classic shows</li>
-                <li>Trailer & basic info shown inside the bot</li>
-                <li>VIP / Balcony / Regular seating options</li>
-                <li>Private screenings for groups</li>
-              </ul>
+              <div className="card-body">
+                <h3>Mini Theatre – All Types of Movies</h3>
+                <p>
+                  Our theatre supports <strong>all movie types</strong> – Tamil,
+                  English, Hindi and special shows with HD projection and clear
+                  sound.
+                </p>
+                <ul>
+                  <li>Latest releases & classic shows</li>
+                  <li>Trailer & basic info shown inside the bot</li>
+                  <li>VIP / Balcony / Regular seating options</li>
+                  <li>Private screenings for groups</li>
+                </ul>
+              </div>
             </article>
 
             {/* Turf */}
             <article className="info-card">
-              <div className="square-image">
+              <div className="wide-image">
                 <img
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s"
                   alt="Turf ground"
                 />
               </div>
-              <h3>Turf Ground – All Types of Games</h3>
-              <p>
-                The turf area is ideal for <strong>football</strong>,{" "}
-                <strong>cricket</strong>, <strong>box cricket</strong>, fitness
-                drills and friendly tournaments, including night matches.
-              </p>
-              <ul>
-                <li>Football 5s / 7s matches</li>
-                <li>Cricket & box-cricket practice</li>
-                <li>Evening & night sessions under lights</li>
-                <li>College, school & office events</li>
-              </ul>
+              <div className="card-body">
+                <h3>Turf Ground – All Types of Games</h3>
+                <p>
+                  The turf area is ideal for <strong>football</strong>,{" "}
+                  <strong>cricket</strong>, <strong>box cricket</strong>, fitness
+                  drills and friendly tournaments, including night matches.
+                </p>
+                <ul>
+                  <li>Football 5s / 7s matches</li>
+                  <li>Cricket & box-cricket practice</li>
+                  <li>Evening & night sessions under lights</li>
+                  <li>College, school & office events</li>
+                </ul>
+              </div>
             </article>
           </div>
         </section>
@@ -308,8 +337,8 @@ const App = () => {
           </div>
         </div>
         <p className="footer-sub">
-          Clean dark design • Square images • Booking only via Smart Booking
-          Bot.
+          Clean dark design • Auto sliding images • Booking only via Smart
+          Booking Bot.
         </p>
       </footer>
     </div>
