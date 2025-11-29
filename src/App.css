@@ -32,9 +32,9 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0.7rem 1.6rem;
-  background: rgba(3, 7, 18, 0.94);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(30, 64, 175, 0.5);
+  background: rgba(3, 7, 18, 0.95);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(30, 64, 175, 0.6);
 }
 
 .nav-left {
@@ -102,14 +102,14 @@ body {
   background: linear-gradient(90deg, #5b21ff, #0ea5e9);
   color: #f9fafb;
   cursor: pointer;
-  box-shadow: 0 10px 28px rgba(56, 189, 248, 0.8);
+  box-shadow: 0 10px 26px rgba(56, 189, 248, 0.8);
   transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 
 .nav-cta:hover {
   transform: translateY(-1px);
   box-shadow: 0 16px 40px rgba(56, 189, 248, 1);
-  filter: brightness(1.04);
+  filter: brightness(1.05);
 }
 
 /* HERO */
@@ -151,7 +151,7 @@ body {
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.7rem;
+  gap: 0.8rem;
   margin-top: 1.4rem;
 }
 
@@ -208,81 +208,58 @@ body {
 
 .hero-right {
   display: flex;
-  justify-content: center;
+  justify-content: center; /* CENTER */
 }
 
 .slider-card {
   width: 100%;
-  max-width: 310px;
+  max-width: 320px;
   padding: 1rem;
   border-radius: 1.2rem;
   background: rgba(15, 23, 42, 0.96);
   border: 1px solid rgba(148, 163, 184, 0.5);
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.9);
+  text-align: center;
 }
 
-/* Mirror image block (safe – only image) */
-
-.image-with-mirror {
-  width: 220px;
+.slider-image {
+  width: 260px;
   margin: 0 auto;
-}
-
-.image-with-mirror.small {
-  width: 160px;
-}
-
-.image-main,
-.image-reflection {
-  width: 100%;
-  height: 0;
-  padding-bottom: 100%; /* 1:1 square */
   border-radius: 1rem;
   overflow: hidden;
 }
 
-.image-main img,
-.image-reflection img {
+.slider-image img {
   width: 100%;
-  height: 100%;
+  height: 260px;
   object-fit: cover;
+  transition: transform 0.35s ease;
 }
 
-/* reflection */
-
-.image-reflection {
-  margin-top: 6px;
-  transform: scaleY(-1);
-  opacity: 0.45;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent);
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.55),
-    transparent
-  );
+.slider-card:hover .slider-image img {
+  transform: scale(1.03);
 }
 
 .slider-text {
-  margin-top: 0.8rem;
-  text-align: center;
+  margin-top: 0.75rem;
 }
 
 .slider-label {
   font-size: 0.74rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  opacity: 0.75;
+  opacity: 0.78;
 }
 
 .slider-text h3 {
-  margin: 0.35rem 0 0.2rem;
+  margin: 0.3rem 0 0.15rem;
   font-size: 1rem;
 }
 
 .slider-text p {
   margin: 0;
   font-size: 0.8rem;
-  opacity: 0.85;
+  opacity: 0.86;
 }
 
 .slider-dots {
@@ -306,7 +283,7 @@ body {
   transform: scale(1.4);
 }
 
-/* SECTIONS */
+/* COMMON SECTIONS */
 
 .section {
   max-width: 1120px;
@@ -316,7 +293,7 @@ body {
 
 .section-title {
   font-size: 1.4rem;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.4rem;
 }
 
 .section-desc {
@@ -342,8 +319,22 @@ body {
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.9);
 }
 
+.square-image {
+  width: 170px;
+  height: 170px;
+  border-radius: 0.9rem;
+  overflow: hidden;
+  margin-bottom: 0.7rem;
+}
+
+.square-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .info-card h3 {
-  margin: 0.7rem 0 0.25rem;
+  margin: 0 0 0.25rem;
   font-size: 1rem;
 }
 
@@ -366,7 +357,7 @@ body {
 /* SERVICES */
 
 .service-grid {
-  margin-top: 1.4rem;
+  margin-top: 1.5rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.4rem;
@@ -465,14 +456,14 @@ body {
   justify-content: center;
   font-size: 0.8rem;
   background: linear-gradient(135deg, #0ea5e9, #4f46e5);
-  box-shadow: 0 0 14px rgba(56, 189, 248, 0.8);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.8);
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .social-icon:hover {
   transform: translateY(-1px) scale(1.03);
-  box-shadow: 0 0 20px rgba(56, 189, 248, 1);
+  box-shadow: 0 0 22px rgba(56, 189, 248, 1);
 }
 
 .social-icon.small {
