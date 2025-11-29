@@ -14,7 +14,7 @@ body {
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
-  background: #ffffff; /* pure white */
+  background: radial-gradient(circle at top, #dbeafe 0, #f9fafb 35%, #e5e7eb);
   color: #0f172a;
 }
 
@@ -103,7 +103,6 @@ body {
 
 .hero {
   padding: 2.2rem 1.6rem 3rem;
-  background: linear-gradient(180deg, #e0f2fe 0, #ffffff 40%);
 }
 
 .hero-content {
@@ -142,7 +141,7 @@ body {
 
 .slider-row-glow {
   position: absolute;
-  inset: -30px 10%;
+  inset: -30px 12%;
   background: radial-gradient(
     circle at top,
     rgba(56, 189, 248, 0.18),
@@ -156,16 +155,17 @@ body {
 .single-slide {
   position: relative;
   margin: 0 auto;
-  max-width: 720px;
+  max-width: 760px;
   background: #ffffff;
-  border-radius: 1.2rem;
+  border-radius: 1.4rem;
   border: 1px solid rgba(148, 163, 184, 0.4);
-  box-shadow: 0 16px 40px rgba(148, 163, 184, 0.38);
+  box-shadow: 0 18px 40px rgba(148, 163, 184, 0.45);
   padding: 0.9rem;
+  overflow: hidden;
 }
 
 .slide-image {
-  border-radius: 0.9rem;
+  border-radius: 1rem;
   overflow: hidden;
 }
 
@@ -174,6 +174,11 @@ body {
   height: 260px;
   object-fit: cover;
   display: block;
+  transition: transform 0.5s ease;
+}
+
+.single-slide:hover .slide-image img {
+  transform: scale(1.03);
 }
 
 .slide-caption {
@@ -188,8 +193,14 @@ body {
 }
 
 .slide-caption h3 {
-  margin: 0.15rem 0 0;
+  margin: 0.15rem 0 0.1rem;
   font-size: 0.98rem;
+}
+
+.slide-desc {
+  margin: 0;
+  font-size: 0.8rem;
+  opacity: 0.8;
 }
 
 .slider-dots {
@@ -213,6 +224,37 @@ body {
   transform: scale(1.4);
 }
 
+/* RUNNING LIGHT BORDER around slider */
+
+.border-runner {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.border-runner::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    #0ea5e9,
+    #22c55e,
+    #f97316,
+    #6366f1,
+    #0ea5e9
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 2px;
+  animation: borderRotate 6s linear infinite;
+  opacity: 0.8;
+}
+
 /* COMMON SECTION */
 
 .section {
@@ -232,6 +274,23 @@ body {
   line-height: 1.7;
 }
 
+/* SHARED CARD ANIMATION */
+
+.card-animated {
+  background: #ffffff;
+  border-radius: 1.2rem;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  box-shadow: 0 14px 32px rgba(148, 163, 184, 0.35);
+  transition: border-color 0.22s ease, box-shadow 0.22s ease,
+    transform 0.22s ease;
+}
+
+.card-animated:hover {
+  border-color: #0ea5e9;
+  box-shadow: 0 20px 48px rgba(59, 130, 246, 0.45);
+  transform: translateY(-3px);
+}
+
 /* ABOUT */
 
 .about-grid {
@@ -243,12 +302,7 @@ body {
 .about-card {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr);
-  gap: 0;
-  background: #ffffff;
-  border-radius: 1.2rem;
-  border: 1px solid rgba(148, 163, 184, 0.5);
   overflow: hidden;
-  box-shadow: 0 14px 32px rgba(148, 163, 184, 0.35);
 }
 
 .about-image img {
@@ -293,19 +347,7 @@ body {
 }
 
 .service-card {
-  background: #ffffff;
-  border-radius: 1.1rem;
   padding: 1rem 1.1rem 1.2rem;
-  border: 1px solid rgba(148, 163, 184, 0.55);
-  box-shadow: 0 14px 32px rgba(148, 163, 184, 0.35);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease,
-    transform 0.2s ease;
-}
-
-.service-card:hover {
-  border-color: #0ea5e9;
-  box-shadow: 0 18px 44px rgba(59, 130, 246, 0.35);
-  transform: translateY(-3px);
 }
 
 .service-card h3 {
@@ -366,11 +408,7 @@ body {
 }
 
 .contact-card {
-  background: #ffffff;
-  border-radius: 1.1rem;
   padding: 1rem 1.2rem;
-  border: 1px solid rgba(148, 163, 184, 0.55);
-  box-shadow: 0 14px 32px rgba(148, 163, 184, 0.35);
 }
 
 .contact-card h3 {
@@ -485,6 +523,15 @@ body {
   100% {
     transform: translateY(15px);
     opacity: 0.4;
+  }
+}
+
+@keyframes borderRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
