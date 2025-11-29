@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
-// -------- DATA ---------
+// -------- SLIDER DATA ---------
 
 const sliderItems = [
   {
@@ -45,7 +45,7 @@ const App = () => {
     return () => clearInterval(id);
   }, []);
 
-  // welcome flower rain hide after few sec
+  // welcome flower hide after few seconds
   useEffect(() => {
     const t = setTimeout(() => setShowWelcome(false), 2600);
     return () => clearTimeout(t);
@@ -213,7 +213,7 @@ const App = () => {
           </div>
         </section>
 
-        {/* ABOUT */}
+        {/* ABOUT (light theme version you asked) */}
         <section id="about" className="section">
           <h2 className="section-title">About the Theatre & Turf</h2>
           <p className="section-desc">
