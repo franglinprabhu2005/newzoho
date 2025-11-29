@@ -22,7 +22,7 @@ const sliderItems = [
     id: 2,
     label: "Movie Poster",
     title: "Big Screen Fun",
-    desc: "Sample movie poster used by the booking bot.",
+    desc: "Sample movie poster look for bookings.",
     img: "https://m.media-amazon.com/images/I/71niXI3lxlL._AC_UF894,1000_QL80_.jpg",
   },
   {
@@ -49,7 +49,7 @@ const App = () => {
     return () => clearInterval(id);
   }, []);
 
-  // hide flower welcome after few seconds
+  // flower rain welcome hide
   useEffect(() => {
     const t = setTimeout(() => setShowWelcome(false), 2600);
     return () => clearTimeout(t);
@@ -81,7 +81,7 @@ const App = () => {
 
   return (
     <div className="site-root">
-      {/* FLOWER RAIN WELCOME */}
+      {/* FLOWER RAIN WELCOME OVERLAY */}
       {showWelcome && (
         <div className="welcome-overlay">
           <div className="welcome-inner">
@@ -183,7 +183,7 @@ const App = () => {
             </div>
           </div>
 
-          {/* SLIDER */}
+          {/* SINGLE WINDOW SLIDER */}
           <div className="slider-row">
             <div className="slider-row-glow" />
             <article className="single-slide card-animated">
@@ -222,6 +222,7 @@ const App = () => {
           </p>
 
           <div className="about-grid">
+            {/* Theatre */}
             <article className="about-card card-animated">
               <div className="about-image">
                 <img
@@ -245,6 +246,7 @@ const App = () => {
               </div>
             </article>
 
+            {/* Turf */}
             <article className="about-card card-animated">
               <div className="about-image">
                 <img
@@ -270,7 +272,7 @@ const App = () => {
           </div>
         </section>
 
-        {/* SERVICES */}
+        {/* SERVICES – BOT FLOW */}
         <section id="services" className="section">
           <h2 className="section-title">How Booking Works (Via Bot)</h2>
           <p className="section-desc">
@@ -281,6 +283,7 @@ const App = () => {
           </p>
 
           <div className="service-grid">
+            {/* Theatre booking */}
             <article className="service-card card-animated">
               <h3>🎬 Theatre Booking – Bot Flow</h3>
               <p>
@@ -301,6 +304,7 @@ const App = () => {
               </button>
             </article>
 
+            {/* Turf booking */}
             <article className="service-card card-animated">
               <h3>⚽ Turf Booking – Bot Flow</h3>
               <p>
@@ -425,7 +429,7 @@ const App = () => {
         <ul className="footer-list">
           <li>Explains Neesmu Mall theatre & turf clearly.</li>
           <li>Shows how Neesmu Smart Booking Bot works for bookings.</li>
-          <li>Dark theme with smooth animations & hover effects.</li>
+          <li>Dark premium theme with smooth animations & hover effects.</li>
           <li>Single window image slider with running light border.</li>
           <li>Flower rain welcome & user feedback section.</li>
         </ul>
