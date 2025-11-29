@@ -14,7 +14,11 @@ body {
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
-  background: radial-gradient(circle at top, #0b1120 0, #020617 55%, #020617);
+  /* Dark premium background (portfolio style) */
+  background:
+    radial-gradient(circle at 0% 0%, #1f2937 0, transparent 50%),
+    radial-gradient(circle at 100% 0%, #111827 0, transparent 55%),
+    radial-gradient(circle at 50% 100%, #020617 0, #020617 55%, #020617 100%);
   color: #e5e7eb;
 }
 
@@ -170,7 +174,7 @@ body {
 
 .hero {
   padding: 2.2rem 1.6rem 3rem;
-  background: radial-gradient(circle at top, #1f2937 0, #020617 55%);
+  background: radial-gradient(circle at 20% 0, rgba(15, 23, 42, 0.7) 0, transparent 55%);
 }
 
 .hero-content {
@@ -240,13 +244,15 @@ body {
   position: relative;
   margin: 0 auto;
   max-width: 760px;
-  background: radial-gradient(circle at top, #0b1120, #020617);
-  border-radius: 1.4rem;
+  background: radial-gradient(circle at 20% 0, #020617 0, #020617 35%, #020617 100%);
+  border-radius: 1.6rem;
   border: 1px solid rgba(148, 163, 184, 0.55);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.9);
+  box-shadow:
+    0 26px 60px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
   padding: 0.9rem;
   overflow: hidden;
-  z-index: 0; /* important for border-runner */
+  z-index: 0;
 }
 
 .slide-image {
@@ -310,28 +316,28 @@ body {
   transform: scale(1.4);
 }
 
-/* 👉 RUNNING LIGHT BORDER ONLY ON FRAME */
+/* Running light border – rectangle ring */
 
 .border-runner {
   position: absolute;
-  inset: -2px;               /* slightly outside card */
+  inset: -3px;
   border-radius: inherit;
   pointer-events: none;
-  z-index: -1;               /* behind card content */
-  padding: 2px;
+  z-index: -1;
+  padding: 3px;
   background:
     linear-gradient(#020617, #020617) padding-box,
     conic-gradient(
       from 0deg,
-      #22d3ee,
       #22c55e,
-      #f97316,
-      #a855f7,
-      #22d3ee
+      #0ea5e9,
+      #6366f1,
+      #8b5cf6,
+      #22c55e
     ) border-box;
   -webkit-background-clip: padding-box, border-box;
   background-clip: padding-box, border-box;
-  animation: borderRotate 7s linear infinite;
+  animation: borderRotate 10s linear infinite;
 }
 
 /* COMMON SECTION */
