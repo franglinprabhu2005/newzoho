@@ -7,7 +7,7 @@ const sliderItems = [
     label: "Neesmu Mahal",
     title: "Royal Mahal Entrance",
     subtitle: "Perfect for events & celebrations",
-    img: "https://i.pinimg.com/564x/f0/1e/4e/f01e4e11b8b77e6f3b4e06efb3e7f8d4.jpg",
+    img: "https://i.pinimg.com/736x/70/ee/9d/70ee9dc93bc4916f57bcab3a719b5185.jpg",
   },
   {
     id: 1,
@@ -32,19 +32,20 @@ const App = () => {
     alert("Booking only via Smart Booking Bot (integration coming soon).");
   };
 
-  // Auto slide
+  // simple auto slider
   useEffect(() => {
-    const id = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % sliderItems.length);
-    }, 4500);
+    const id = setInterval(
+      () => setCurrent((prev) => (prev + 1) % sliderItems.length),
+      5000
+    );
     return () => clearInterval(id);
   }, []);
 
-  const goTo = (index) => setCurrent(index);
+  const goTo = (idx) => setCurrent(idx);
 
   return (
     <div className="site-root">
-      {/* NAVBAR */}
+      {/* NAV */}
       <header className="nav">
         <div className="nav-left">
           <div className="logo-orb">N</div>
@@ -53,19 +54,49 @@ const App = () => {
             <span className="logo-sub">Theatre • Turf • Events</span>
           </div>
         </div>
+
         <nav className="nav-links">
-          <button onClick={() => document.getElementById("home").scrollIntoView({ behavior: "smooth" })}>Home</button>
-          <button onClick={() => document.getElementById("about").scrollIntoView({ behavior: "smooth" })}>About</button>
-          <button onClick={() => document.getElementById("services").scrollIntoView({ behavior: "smooth" })}>Services</button>
-          <button onClick={() => document.getElementById("contact").scrollIntoView({ behavior: "smooth" })}>Contact</button>
+          <button
+            onClick={() =>
+              document.getElementById("home").scrollIntoView({ behavior: "smooth" })
+            }
+          >
+            Home
+          </button>
+          <button
+            onClick={() =>
+              document.getElementById("about").scrollIntoView({ behavior: "smooth" })
+            }
+          >
+            About
+          </button>
+          <button
+            onClick={() =>
+              document
+                .getElementById("services")
+                .scrollIntoView({ behavior: "smooth" })
+            }
+          >
+            Services
+          </button>
+          <button
+            onClick={() =>
+              document
+                .getElementById("contact")
+                .scrollIntoView({ behavior: "smooth" })
+            }
+          >
+            Contact
+          </button>
         </nav>
+
         <button className="nav-cta" onClick={openBot}>
           Open Smart Booking Bot
         </button>
       </header>
 
       <main>
-        {/* HOME / HERO */}
+        {/* HOME */}
         <section id="home" className="hero">
           <div className="hero-left">
             <p className="hero-chip">Royal • Dark • Bot Powered</p>
@@ -78,8 +109,8 @@ const App = () => {
               Neesmu Mahal is a modern entertainment space with a{" "}
               <strong>premium mini-theatre</strong> and a{" "}
               <strong>multi-sport turf ground</strong>. All bookings are handled
-              only through our <strong>Smart Booking Bot</strong> – not by
-              website forms.
+              only through our <strong>Smart Booking Bot</strong> – the website
+              is for clear information and guidance.
             </p>
             <div className="hero-actions">
               <button className="btn-primary" onClick={openBot}>
@@ -98,20 +129,29 @@ const App = () => {
             </div>
             <div className="hero-tags">
               <span>Mobile • Tablet • PC</span>
-              <span>Dark & Royal</span>
+              <span>Dark & Simple</span>
               <span>Bot Based Booking</span>
             </div>
           </div>
 
-          {/* SLIDER RIGHT */}
+          {/* slider with simple mirror image */}
           <div className="hero-right">
-            <div className="slider mirror-card">
-              <div className="slider-square neon-border">
-                <img
-                  src={sliderItems[current].img}
-                  alt={sliderItems[current].label}
-                />
+            <div className="slider-card">
+              <div className="image-with-mirror">
+                <div className="image-main">
+                  <img
+                    src={sliderItems[current].img}
+                    alt={sliderItems[current].label}
+                  />
+                </div>
+                <div className="image-reflection">
+                  <img
+                    src={sliderItems[current].img}
+                    alt={sliderItems[current].label + " reflection"}
+                  />
+                </div>
               </div>
+
               <div className="slider-text">
                 <span className="slider-label">
                   {sliderItems[current].label}
@@ -119,14 +159,13 @@ const App = () => {
                 <h3>{sliderItems[current].title}</h3>
                 <p>{sliderItems[current].subtitle}</p>
               </div>
+
               <div className="slider-dots">
-                {sliderItems.map((item, index) => (
+                {sliderItems.map((it, i) => (
                   <button
-                    key={item.id}
-                    className={
-                      index === current ? "dot active-dot" : "dot"
-                    }
-                    onClick={() => goTo(index)}
+                    key={it.id}
+                    className={i === current ? "dot dot-active" : "dot"}
+                    onClick={() => goTo(i)}
                   />
                 ))}
               </div>
@@ -134,122 +173,120 @@ const App = () => {
           </div>
         </section>
 
-        {/* ABOUT SECTION */}
-        <section id="about" className="section about">
+        {/* ABOUT */}
+        <section id="about" className="section">
           <h2 className="section-title">About Neesmu Mahal</h2>
           <p className="section-desc">
-            Neesmu Mahal is designed as a <strong>royal yet modern</strong>{" "}
-            space for movies and games. The venue combines a{" "}
-            <strong>mini-theatre</strong> for all types of movies and a{" "}
-            <strong>turf ground</strong> that supports different sports and
-            events. Everything is simple for the user – they see this site, and
-            then finish their booking using the Smart Booking Bot.
+            Neesmu Mahal is a <strong>royal but simple</strong> venue built for
+            both movies and games. The space includes a{" "}
+            <strong>mini-theatre</strong> for all kinds of films and a{" "}
+            <strong>turf ground</strong> for multiple sports. Users first see
+            this website, understand the options, and then complete booking
+            inside the Smart Booking Bot.
           </p>
 
           <div className="about-grid">
-            {/* Theatre card */}
-            <article className="about-card">
-              <div className="square-wrapper neon-border">
-                <img
-                  src="https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg"
-                  alt="Theatre hall"
-                />
+            {/* Theatre */}
+            <article className="info-card">
+              <div className="image-with-mirror small">
+                <div className="image-main">
+                  <img
+                    src="https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg"
+                    alt="Theatre hall"
+                  />
+                </div>
+                <div className="image-reflection">
+                  <img
+                    src="https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg"
+                    alt="Theatre reflection"
+                  />
+                </div>
               </div>
               <h3>Mini Theatre – All Types of Movies</h3>
               <p>
-                Our mini-theatre supports <strong>all movie types</strong> –
-                Tamil, English, Hindi, and special shows. With HD projection,
-                powerful sound and comfortable seating, it is perfect for
-                group screenings and private shows.
+                The mini-theatre supports <strong>all movie types</strong> –
+                Tamil, English, Hindi and special fan shows with HD projection
+                and clear sound.
               </p>
               <ul>
-                <li>Latest releases & special shows</li>
-                <li>Trailers and basic movie info in the bot</li>
-                <li>VIP, Balcony and Regular seating options</li>
-                <li>Family & friends group bookings</li>
+                <li>Latest releases & classic movies</li>
+                <li>Trailer links and basic details shown in the bot</li>
+                <li>VIP / Balcony / Regular seating choices</li>
+                <li>Group screenings for family & friends</li>
               </ul>
             </article>
 
-            {/* Turf card */}
-            <article className="about-card">
-              <div className="square-wrapper neon-border">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s"
-                  alt="Turf ground"
-                />
+            {/* Turf */}
+            <article className="info-card">
+              <div className="image-with-mirror small">
+                <div className="image-main">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s"
+                    alt="Turf ground"
+                  />
+                </div>
+                <div className="image-reflection">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s"
+                    alt="Turf reflection"
+                  />
+                </div>
               </div>
               <h3>Turf Ground – All Types of Games</h3>
               <p>
-                The Neesmu turf is suitable for <strong>football</strong>,{" "}
-                <strong>cricket</strong>, <strong>box cricket</strong>, fitness
-                drills and friendly tournaments, including night matches under
-                lights.
+                The turf area is designed for <strong>football</strong>,{" "}
+                <strong>cricket</strong>, <strong>box-cricket</strong>, fitness
+                drills and friendly tournaments, including night games.
               </p>
               <ul>
                 <li>Football 5s / 7s matches</li>
-                <li>Cricket & box cricket practice</li>
-                <li>Evening & night light sessions</li>
-                <li>College & office events</li>
+                <li>Cricket & box-cricket practice</li>
+                <li>Evening & night sessions under lights</li>
+                <li>College, school & office events</li>
               </ul>
             </article>
           </div>
         </section>
 
-        {/* SERVICES SECTION */}
-        <section id="services" className="section services">
+        {/* SERVICES */}
+        <section id="services" className="section">
           <h2 className="section-title">Our Services</h2>
           <p className="section-desc">
-            All bookings for Neesmu Mahal are handled strictly{" "}
-            <strong>through the Smart Booking Bot only</strong>. This website
-            is for clear information – booking form or payment is not available
-            here.
+            Neesmu Mahal bookings are done <strong>only</strong> through the
+            Smart Booking Bot. This website does not collect payment or booking
+            details – it only explains how the process works.
           </p>
 
           <div className="service-grid">
-            {/* Theatre service */}
-            <div className="service-card mirror-card">
-              <div className="square-wrapper neon-border small-square">
-                <img
-                  src="https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg"
-                  alt="Theatre service"
-                />
-              </div>
+            <div className="service-card">
               <h3>🎬 Theatre Booking (via Bot)</h3>
               <p>
-                Theatre tickets are booked only inside the{" "}
-                <strong>Smart Booking Bot</strong>. The website will never ask
-                for payment or seat count directly.
+                Movie ticket booking is completely handled inside the Smart
+                Booking Bot. The user will never fill any theatre form on this
+                site.
               </p>
               <ul>
-                <li>User chooses “Theatre Booking” in the bot</li>
-                <li>Bot shows movie list, basic info & trailer link</li>
-                <li>Date, show time, class & tickets count collected</li>
-                <li>Final confirmation recap sent inside the chat</li>
+                <li>Choose “Theatre Booking” option in the bot</li>
+                <li>View movies, timings & basic details</li>
+                <li>Select date, show time, seat class & ticket count</li>
+                <li>Get a clear confirmation summary in chat</li>
               </ul>
               <button className="btn-outline" onClick={openBot}>
                 Open Bot for Theatre
               </button>
             </div>
 
-            {/* Turf service */}
-            <div className="service-card mirror-card">
-              <div className="square-wrapper neon-border small-square">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s"
-                  alt="Turf service"
-                />
-              </div>
+            <div className="service-card">
               <h3>⚽ Turf Booking (via Bot)</h3>
               <p>
-                Turf slots are also booked only using the{" "}
-                <strong>Smart Booking Bot</strong>. No direct web booking –
-                everything comes through chat, so details are correct.
+                Turf slot booking is also done only in the Smart Booking Bot for
+                correct timing and player details.
               </p>
               <ul>
-                <li>User selects “Turf Booking” in the bot</li>
-                <li>Game type, date & time slot chosen</li>
-                <li>Player count & special notes captured</li>
-                <li>Summary message confirms the slot</li>
+                <li>Select “Turf Booking” option in the bot</li>
+                <li>Choose game type (football / cricket etc.)</li>
+                <li>Pick date, time slot and number of players</li>
+                <li>Review final slot summary sent by the bot</li>
               </ul>
               <button className="btn-outline" onClick={openBot}>
                 Open Bot for Turf
@@ -258,16 +295,17 @@ const App = () => {
           </div>
         </section>
 
-        {/* CONTACT SECTION */}
-        <section id="contact" className="section contact">
+        {/* CONTACT */}
+        <section id="contact" className="section">
           <h2 className="section-title">Contact Neesmu Mahal</h2>
           <p className="section-desc">
-            For any questions about theatre or turf, feel free to reach us. For
-            booking confirmations, always use the Smart Booking Bot.
+            For doubts about theatre shows or turf availability, you can contact
+            us. For booking confirmation, always depend on the Smart Booking
+            Bot.
           </p>
 
           <div className="contact-grid">
-            <div className="contact-info">
+            <div className="contact-card">
               <h3>Venue Address</h3>
               <p>
                 <strong>Neesmu Mahal</strong>
@@ -289,7 +327,7 @@ const App = () => {
               </p>
             </div>
 
-            <div className="contact-social">
+            <div className="contact-card">
               <h3>Social Media</h3>
               <p>Follow & message us any time.</p>
               <div className="social-row">
@@ -307,12 +345,11 @@ const App = () => {
         </section>
       </main>
 
-      {/* FLOAT BOT BUTTON */}
+      {/* floating bot button */}
       <button className="floating-bot" onClick={openBot}>
         🤖
       </button>
 
-      {/* FOOTER */}
       <footer className="footer">
         <div className="footer-top">
           <span>© 2025 Neesmu Mahal. All rights reserved.</span>
@@ -325,8 +362,8 @@ const App = () => {
           </div>
         </div>
         <p className="footer-sub">
-          Dark & royal UI • Square images with running light • Booking only via
-          Smart Booking Bot.
+          Clean dark design • Simple mirror effect • Booking only via Smart
+          Booking Bot.
         </p>
       </footer>
     </div>
