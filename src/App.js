@@ -1,42 +1,42 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
-// -------- DATA ---------
+// -------- SLIDER DATA ---------
 
 const sliderItems = [
   {
     id: 0,
     label: "Neesmu Mall",
     title: "Welcome to Neesmu Mall",
-    img: "https://i.pinimg.com/736x/70/ee/9d/70ee9dc93bc4916f57bcab3a719b5185.jpg", // mall front
+    img: "https://i.pinimg.com/736x/70/ee/9d/70ee9dc93bc4916f57bcab3a719b5185.jpg",
   },
   {
     id: 1,
     label: "Now Showing",
     title: "Cinema Experience",
-    img: "https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg", // theatre
+    img: "https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg",
   },
   {
     id: 2,
     label: "Movie Poster",
     title: "Big Screen Fun",
-    img: "https://m.media-amazon.com/images/I/71niXI3lxlL._AC_UF894,1000_QL80_.jpg", // sample poster
+    img: "https://m.media-amazon.com/images/I/71niXI3lxlL._AC_UF894,1000_QL80_.jpg",
   },
   {
     id: 3,
     label: "Turf Ground",
     title: "All Sports Turf",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s", // turf
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s",
   },
 ];
-
-// -------- COMPONENT ---------
 
 const App = () => {
   const [current, setCurrent] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const [showWelcome, setShowWelcome] = useState(true);
 
-  // auto slide
+  // auto slider
   useEffect(() => {
     const id = setInterval(
       () => setCurrent((prev) => (prev + 1) % sliderItems.length),
@@ -45,20 +45,53 @@ const App = () => {
     return () => clearInterval(id);
   }, []);
 
+  // welcome flower hide after few seconds
+  useEffect(() => {
+    const t = setTimeout(() => setShowWelcome(false), 2600);
+    return () => clearTimeout(t);
+  }, []);
+
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
+      setActiveSection(id);
       setMobileMenuOpen(false);
     }
   };
 
   const openBot = () => {
-    alert("Booking only via Neesmu Smart Booking Bot (SalesIQ bot integration).");
+    alert("Booking only via Neesmu Smart Booking Bot (SalesIQ integration).");
   };
+
+  const handleFeedbackSubmit = (e) => {
+    e.preventDefault();
+    alert("Thanks for your feedback! 🙌");
+    e.target.reset();
+  };
+
+  const navBtnClass = (id) =>
+    `nav-btn ${activeSection === id ? "nav-btn-active" : ""}`;
 
   return (
     <div className="site-root">
+      {/* FLOWER WELCOME OVERLAY */}
+      {showWelcome && (
+        <div className="welcome-overlay">
+          <div className="welcome-inner">
+            <p className="welcome-title">Welcome to Neesmu Mall</p>
+            <p className="welcome-sub">Theatre & Turf bot booking guide</p>
+          </div>
+          <div className="flower-layer">
+            {Array.from({ length: 10 }).map((_, i) => (
+              <span key={i} className={`flower f${(i % 5) + 1}`}>
+                🌸
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* NAVBAR */}
       <header className="nav">
         <div className="nav-left">
@@ -67,10 +100,27 @@ const App = () => {
         </div>
 
         <nav className="nav-links nav-links-desktop">
-          <button onClick={() => scrollTo("home")}>Home</button>
-          <button onClick={() => scrollTo("about")}>About</button>
-          <button onClick={() => scrollTo("services")}>Services</button>
-          <button onClick={() => scrollTo("contact")}>Contact</button>
+          <button className={navBtnClass("home")} onClick={() => scrollTo("home")}>
+            Home
+          </button>
+          <button
+            className={navBtnClass("about")}
+            onClick={() => scrollTo("about")}
+          >
+            About
+          </button>
+          <button
+            className={navBtnClass("services")}
+            onClick={() => scrollTo("services")}
+          >
+            Services
+          </button>
+          <button
+            className={navBtnClass("contact")}
+            onClick={() => scrollTo("contact")}
+          >
+            Contact
+          </button>
         </nav>
 
         <button
@@ -81,12 +131,30 @@ const App = () => {
         </button>
       </header>
 
+      {/* MOBILE NAV MENU */}
       {mobileMenuOpen && (
         <div className="mobile-menu">
-          <button onClick={() => scrollTo("home")}>Home</button>
-          <button onClick={() => scrollTo("about")}>About</button>
-          <button onClick={() => scrollTo("services")}>Services</button>
-          <button onClick={() => scrollTo("contact")}>Contact</button>
+          <button className={navBtnClass("home")} onClick={() => scrollTo("home")}>
+            Home
+          </button>
+          <button
+            className={navBtnClass("about")}
+            onClick={() => scrollTo("about")}
+          >
+            About
+          </button>
+          <button
+            className={navBtnClass("services")}
+            onClick={() => scrollTo("services")}
+          >
+            Services
+          </button>
+          <button
+            className={navBtnClass("contact")}
+            onClick={() => scrollTo("contact")}
+          >
+            Contact
+          </button>
         </div>
       )}
 
@@ -97,9 +165,7 @@ const App = () => {
             <h1>
               <span className="hero-highlight">Neesmu Mall</span>
             </h1>
-            <p className="hero-sub">
-              Theatre & Turf inside one modern mall.
-            </p>
+            <p className="hero-sub">Theatre & Turf inside one modern mall.</p>
             <p className="hero-text">
               Neesmu Mall is an entertainment spot with a{" "}
               <strong>cinema style theatre</strong> and a{" "}
@@ -108,12 +174,6 @@ const App = () => {
               <strong>movies and turf slots</strong> happens through the{" "}
               <strong>Neesmu Smart Booking Bot</strong>.
             </p>
-
-            <div className="hero-tags">
-              <span>Theatre + Turf in one place</span>
-              <span>Bot based booking</span>
-              <span>Mobile friendly site</span>
-            </div>
           </div>
 
           {/* FLIP SLIDER */}
@@ -125,7 +185,8 @@ const App = () => {
                   <div
                     key={item.id}
                     className={
-                      "slide-card" + (isActive ? " slide-card-active" : "")
+                      "slide-card elevated-card" +
+                      (isActive ? " slide-card-active" : "")
                     }
                   >
                     <div className="slide-image">
@@ -152,20 +213,20 @@ const App = () => {
           </div>
         </section>
 
-        {/* ABOUT */}
+        {/* ABOUT (light theme version you asked) */}
         <section id="about" className="section">
           <h2 className="section-title">About the Theatre & Turf</h2>
           <p className="section-desc">
             Neesmu Mall has two main zones – a{" "}
-            <strong>movie theatre</strong> and a{"strong"> multi-sport turf
-            ground</strong>. Both are designed for friends, family and team
-            outings.
+            <strong>movie theatre</strong> and a{" "}
+            <strong>multi-sport turf ground</strong>. Both are designed for
+            friends, family and team outings.
           </p>
 
           <div className="about-grid">
             {/* Theatre */}
-            <article className="about-card">
-              <div className="about-image">
+            <article className="about-card elevated-card">
+              <div className="about-top-image">
                 <img
                   src="https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg"
                   alt="Theatre hall"
@@ -182,14 +243,14 @@ const App = () => {
                   <li>Big screen, surround sound, comfy seats</li>
                   <li>New releases, re–runs & private shows</li>
                   <li>Morning, matinee, evening & night shows</li>
-                  <li>Best for birthdays, bachelor shows, group hangouts</li>
+                  <li>Perfect for birthdays & group hangouts</li>
                 </ul>
               </div>
             </article>
 
             {/* Turf */}
-            <article className="about-card">
-              <div className="about-image">
+            <article className="about-card elevated-card">
+              <div className="about-top-image">
                 <img
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s"
                   alt="Turf ground"
@@ -204,9 +265,9 @@ const App = () => {
                 </p>
                 <ul>
                   <li>Football 5s / 7s matches & practice</li>
-                  <li>Cricket & box-cricket nets style play</li>
+                  <li>Cricket & box-cricket style games</li>
                   <li>Evening / night slots with lights</li>
-                  <li>Suitable for college & office tournaments</li>
+                  <li>College and office tournaments</li>
                 </ul>
               </div>
             </article>
@@ -225,13 +286,13 @@ const App = () => {
 
           <div className="service-grid">
             {/* Theatre booking */}
-            <article className="service-card">
+            <article className="service-card elevated-card">
               <h3>🎬 Theatre Booking – Bot Flow</h3>
               <p>
                 User selects <strong>“Theatre Booking”</strong> inside the bot.
               </p>
               <ul>
-                <li>Bot shows movie list & basic poster.</li>
+                <li>Bot shows movie list & poster preview.</li>
                 <li>Asks for date & show time (morning / matinee / night).</li>
                 <li>Asks for class (VIP / Balcony / Regular).</li>
                 <li>Asks how many tickets are needed.</li>
@@ -246,7 +307,7 @@ const App = () => {
             </article>
 
             {/* Turf booking */}
-            <article className="service-card">
+            <article className="service-card elevated-card">
               <h3>⚽ Turf Booking – Bot Flow</h3>
               <p>
                 User selects <strong>“Turf Booking”</strong> inside the bot.
@@ -255,9 +316,7 @@ const App = () => {
                 <li>Bot asks which game – football, cricket, box-cricket.</li>
                 <li>Then asks for date & time slot.</li>
                 <li>Collects number of players joining.</li>
-                <li>
-                  Optionally takes notes (team name, friendly match details).
-                </li>
+                <li>Optional notes (team name, friendly match info).</li>
                 <li>
                   Sends final slot summary & confirms booking inside the chat.
                 </li>
@@ -279,7 +338,7 @@ const App = () => {
           </p>
 
           <div className="contact-grid">
-            <div className="contact-card">
+            <div className="contact-card elevated-card">
               <h3>Address</h3>
               <p>
                 <strong>Neesmu Mall</strong>
@@ -297,7 +356,7 @@ const App = () => {
               </p>
             </div>
 
-            <div className="contact-card">
+            <div className="contact-card elevated-card">
               <h3>Social Media</h3>
               <p>Follow us and send a message any time:</p>
               <div className="social-row">
@@ -312,6 +371,53 @@ const App = () => {
             </div>
           </div>
         </section>
+
+        {/* FEEDBACK (no nav item) */}
+        <section id="feedback" className="section">
+          <h2 className="section-title">User Feedback</h2>
+          <p className="section-desc">
+            Share how your experience with Neesmu Mall theatre or turf felt.
+            This form is only for feedback – booking still happens in the bot.
+          </p>
+
+          <div className="feedback-card elevated-card">
+            <form onSubmit={handleFeedbackSubmit} className="feedback-form">
+              <div className="form-row">
+                <label>
+                  Name
+                  <input type="text" placeholder="Your name (optional)" />
+                </label>
+              </div>
+              <div className="form-row">
+                <label>
+                  Rating
+                  <select defaultValue="">
+                    <option value="" disabled>
+                      Select a rating
+                    </option>
+                    <option>⭐ Very bad</option>
+                    <option>⭐⭐ Ok</option>
+                    <option>⭐⭐⭐ Good</option>
+                    <option>⭐⭐⭐⭐ Very good</option>
+                    <option>⭐⭐⭐⭐⭐ Excellent</option>
+                  </select>
+                </label>
+              </div>
+              <div className="form-row">
+                <label>
+                  Feedback
+                  <textarea
+                    rows="3"
+                    placeholder="Tell us what you liked or what we can improve..."
+                  />
+                </label>
+              </div>
+              <button type="submit" className="btn-primary feedback-btn">
+                Submit Feedback
+              </button>
+            </form>
+          </div>
+        </section>
       </main>
 
       {/* FLOATING BOT ICON */}
@@ -323,13 +429,14 @@ const App = () => {
       <footer className="footer">
         <p className="footer-title">Features of this site</p>
         <ul className="footer-list">
-          <li>Clear explanation of Neesmu Mall theatre & turf.</li>
-          <li>Shows how Smart Booking Bot handles all bookings.</li>
+          <li>Explains Neesmu Mall theatre & turf in simple steps.</li>
+          <li>Shows how Neesmu Smart Booking Bot handles bookings.</li>
           <li>Responsive layout for mobile, tablet and desktop.</li>
           <li>Flip style image slider with mall, movie & turf photos.</li>
+          <li>Floating bot shortcut & user feedback section.</li>
         </ul>
         <p className="footer-copy">
-          © 2025 Neesmu Mall • Built as a bot–guide website.
+          © 2025 Neesmu Mall • Built as a booking-bot guide website.
         </p>
       </footer>
     </div>
