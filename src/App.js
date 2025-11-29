@@ -4,7 +4,7 @@ import "./App.css";
 const App = () => {
   // Later unga bot open code inga varum
   const openBot = () => {
-    alert("Smart Booking Bot integration varanum (openBot() hook ready).");
+    alert("Smart Booking Bot integration pending (openBot() function ready).");
   };
 
   return (
@@ -23,8 +23,9 @@ const App = () => {
         </button>
       </header>
 
-      {/* HERO */}
+      {/* MAIN */}
       <main className="main">
+        {/* HERO */}
         <section className="hero">
           <div className="hero-copy">
             <p className="hero-chip">Dark theme • Mirror UI • Bot guide</p>
@@ -36,10 +37,10 @@ const App = () => {
             <p className="hero-desc">
               Intha website la user ku{" "}
               <strong>epdi booking bot la book pannuradhu</strong> nu step by
-              step explain pannuvom.  
-              Real booking & details ellam{" "}
+              step explain pannuvom. Real booking & details ellam{" "}
               <strong>Smart Booking Bot</strong> la dhaan nadakkum.
             </p>
+
             <div className="hero-actions">
               <button className="btn-primary" onClick={openBot}>
                 Start in Bot
@@ -55,6 +56,7 @@ const App = () => {
                 See booking flow
               </button>
             </div>
+
             <div className="hero-tags">
               <span>Mobile • Tablet • PC</span>
               <span>Clear steps</span>
@@ -62,7 +64,7 @@ const App = () => {
             </div>
           </div>
 
-          {/* Center mirror card with running circle preview */}
+          {/* HERO PREVIEW – THEATRE IMAGE + RUNNING LIGHT CIRCLE */}
           <div className="hero-preview mirror-card">
             <div className="orbit-wrapper">
               <div className="orbit-ring orbit-ring-1" />
@@ -72,7 +74,7 @@ const App = () => {
               <div className="orbit-center">
                 <img
                   src="https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg"
-                  alt="Theatre interior"
+                  alt="Theatre hall"
                 />
               </div>
             </div>
@@ -86,15 +88,17 @@ const App = () => {
         <section id="flow-section" className="flip-section">
           <h2 className="section-title">Epdi bot la book pannuvanga?</h2>
           <p className="section-sub">
-            Keela irukkura flip cards la <strong>Theatre</strong>,{" "}
-            <strong>Turf</strong>, <strong>Bot features</strong>,{" "}
-            <strong>Site role</strong> – ellam thelivaa solli irukku.
+            Keela irukkura flip cards la{" "}
+            <strong>Theatre</strong>, <strong>Turf</strong>,{" "}
+            <strong>Bot features</strong>, <strong>Site role</strong> – ellam
+            thelivaa solli irukku.
           </p>
 
           <div className="flip-grid">
-            {/* THEATRE */}
+            {/* THEATRE CARD */}
             <div className="flip-card mirror-card">
               <div className="flip-inner">
+                {/* FRONT */}
                 <div className="flip-face flip-front theatre-front">
                   <div className="flip-front-overlay" />
                   <div className="flip-front-content">
@@ -103,7 +107,7 @@ const App = () => {
                       <div className="small-orbit-center">
                         <img
                           src="https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg"
-                          alt="Theatre image"
+                          alt="Theatre"
                         />
                       </div>
                     </div>
@@ -112,28 +116,31 @@ const App = () => {
                     <p>Big screen, red seats – theatre booking bot la.</p>
                   </div>
                 </div>
+
+                {/* BACK */}
                 <div className="flip-face flip-back">
                   <h3>Theatre – Smart Booking Bot steps:</h3>
                   <ul>
-                    <li>1. Bot la &quot;Theatre&quot; option select pannuvanga.</li>
+                    <li>1. Bot la “Theatre” option select pannuvanga.</li>
                     <li>2. Available movies list la irundhu movie choose.</li>
-                    <li>3. Movie trailer link open pannitu preview paakalam.</li>
+                    <li>3. Trailer link open pannitu preview paakalam.</li>
                     <li>4. Feedback / rating pathu decide pannuvanga.</li>
                     <li>5. Date & show time select.</li>
                     <li>6. Class (VIP / Balcony / First) choose.</li>
                     <li>7. Yethana perukku ticket venum nu solranga.</li>
                   </ul>
                   <p className="flip-note">
-                    Itha ellam bot question la nadakkum. Site la just steps
-                    explain mattum.
+                    Itha ellam bot questions la nadakkum. Site la steps explain
+                    mattum.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* TURF */}
+            {/* TURF CARD */}
             <div className="flip-card mirror-card">
               <div className="flip-inner">
+                {/* FRONT */}
                 <div className="flip-face flip-front turf-front">
                   <div className="flip-front-overlay" />
                   <div className="flip-front-content">
@@ -142,7 +149,7 @@ const App = () => {
                       <div className="small-orbit-center">
                         <img
                           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s"
-                          alt="Turf image"
+                          alt="Turf"
                         />
                       </div>
                     </div>
@@ -151,10 +158,12 @@ const App = () => {
                     <p>Flood light la game vibe – bot la slots book pannuvanga.</p>
                   </div>
                 </div>
+
+                {/* BACK */}
                 <div className="flip-face flip-back">
                   <h3>Turf – Smart Booking Bot steps:</h3>
                   <ul>
-                    <li>1. &quot;Turf&quot; option choose.</li>
+                    <li>1. “Turf” option choose.</li>
                     <li>2. Game type (Football / Cricket) select pannalam.</li>
                     <li>3. Date choose.</li>
                     <li>4. Time slot (Morning / Evening / Night) select.</li>
@@ -168,17 +177,20 @@ const App = () => {
               </div>
             </div>
 
-            {/* BOT FEATURES */}
+            {/* BOT FEATURES CARD */}
             <div className="flip-card mirror-card">
               <div className="flip-inner">
+                {/* FRONT */}
                 <div className="flip-face flip-front bot-front">
                   <div className="flip-front-overlay" />
                   <div className="flip-front-content simple-front">
                     <span className="flip-tag">Smart Booking Bot</span>
                     <h3>One chat – Theatre & Turf</h3>
-                    <p>Question-answer maari smooth booking experience.</p>
+                    <p>Question–answer maari smooth booking experience.</p>
                   </div>
                 </div>
+
+                {/* BACK */}
                 <div className="flip-face flip-back">
                   <h3>Smart Booking Bot la enna irukkum?</h3>
                   <ul>
@@ -186,38 +198,40 @@ const App = () => {
                     <li>Movie details, trailer link, rating share pannum.</li>
                     <li>Date, time, class, players count ellam kelvi kekkum.</li>
                     <li>Last la neat booking summary message.</li>
-                    <li>Tamil / English maari mix la question kekkalaam.</li>
+                    <li>Tamil / English mix la questions irukkalaam.</li>
                   </ul>
                   <p className="flip-note">
-                    Bot logic la maatum change panna easy. Site kitta link
-                    mattum irukkum.
+                    Bot logic la changes easy. Site just info + entry point.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* SITE ROLE */}
+            {/* SITE ROLE CARD */}
             <div className="flip-card mirror-card">
               <div className="flip-inner">
+                {/* FRONT */}
                 <div className="flip-face flip-front site-front">
                   <div className="flip-front-overlay" />
                   <div className="flip-front-content simple-front">
                     <span className="flip-tag">This Website</span>
                     <h3>Enna role?</h3>
-                    <p>Just clear info + super dark UI.</p>
+                    <p>Clear info + super dark UI.</p>
                   </div>
                 </div>
+
+                {/* BACK */}
                 <div className="flip-face flip-back">
                   <h3>Site la irukkura features:</h3>
                   <ul>
-                    <li>Dark theme, neon highlight, mirror reflection.</li>
+                    <li>Pure dark theme, neon highlight.</li>
                     <li>Theatre & Turf images ku running light circle.</li>
-                    <li>Flip cards la booking steps explain pannum.</li>
+                    <li>Flip cards la booking steps explain.</li>
                     <li>All device ku responsive layout.</li>
-                    <li>Bot open button & floating icon ready.</li>
+                    <li>Smart Bot open button & floating icon ready.</li>
                   </ul>
                   <p className="flip-note">
-                    Booking ella bot la. Site just visually guide pannum.
+                    Booking ella bot la. Site just visual guide.
                   </p>
                 </div>
               </div>
@@ -228,16 +242,16 @@ const App = () => {
         {/* BOTTOM STRIP */}
         <section className="strip">
           <div className="strip-item">
-            <h4>Device Friendly</h4>
+            <h4>Device friendly</h4>
             <p>Phone, tablet, laptop – layout auto adjust aagum.</p>
           </div>
           <div className="strip-item">
-            <h4>Smooth Animations</h4>
-            <p>Hover, flip, glow – subtle aa but classy aa.</p>
+            <h4>Smooth animations</h4>
+            <p>Hover, flip, orbit – smooth & light.</p>
           </div>
           <div className="strip-item">
-            <h4>Mirror Look</h4>
-            <p>Cards reflection nala premium feel varum.</p>
+            <h4>Mirror look</h4>
+            <p>Reflection nala premium feel user ku varum.</p>
           </div>
         </section>
       </main>
@@ -247,6 +261,7 @@ const App = () => {
         🤖
       </button>
 
+      {/* FOOTER */}
       <footer className="footer">
         <p>© {new Date().getFullYear()} Moonlight Mahal – Theatre & Turf</p>
         <p className="footer-sub">
