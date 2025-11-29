@@ -1,436 +1,754 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-// -------- SLIDER DATA ---------
+html,
+body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
 
-const sliderItems = [
-  {
-    id: 0,
-    label: "Neesmu Mall",
-    title: "Welcome to Neesmu Mall",
-    img: "https://i.pinimg.com/736x/70/ee/9d/70ee9dc93bc4916f57bcab3a719b5185.jpg",
-  },
-  {
-    id: 1,
-    label: "Now Showing",
-    title: "Cinema Experience",
-    img: "https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg",
-  },
-  {
-    id: 2,
-    label: "Movie Poster",
-    title: "Big Screen Fun",
-    img: "https://m.media-amazon.com/images/I/71niXI3lxlL._AC_UF894,1000_QL80_.jpg",
-  },
-  {
-    id: 3,
-    label: "Turf Ground",
-    title: "All Sports Turf",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s",
-  },
-];
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #ffffff; /* pure white */
+  color: #0f172a;
+}
 
-const App = () => {
-  const [current, setCurrent] = useState(0);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
-  const [showWelcome, setShowWelcome] = useState(true);
+.site-root {
+  min-height: 100vh;
+}
 
-  // auto slider
-  useEffect(() => {
-    const id = setInterval(
-      () => setCurrent((prev) => (prev + 1) % sliderItems.length),
-      3500
-    );
-    return () => clearInterval(id);
-  }, []);
+/* WELCOME OVERLAY – LIGHT */
 
-  // welcome flower hide after few seconds
-  useEffect(() => {
-    const t = setTimeout(() => setShowWelcome(false), 2600);
-    return () => clearTimeout(t);
-  }, []);
+.welcome-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, #e0f2fe 0, #ffffff 55%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  overflow: hidden;
+}
 
-  const scrollTo = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-      setActiveSection(id);
-      setMobileMenuOpen(false);
-    }
-  };
+.welcome-inner {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
 
-  const openBot = () => {
-    alert("Booking only via Neesmu Smart Booking Bot (SalesIQ integration).");
-  };
+.welcome-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  background: linear-gradient(to right, #0ea5e9, #6366f1, #f97316);
+  -webkit-background-clip: text;
+  color: transparent;
+}
 
-  const handleFeedbackSubmit = (e) => {
-    e.preventDefault();
-    alert("Thanks for your feedback! 🙌");
-    e.target.reset();
-  };
+.welcome-sub {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-top: 0.25rem;
+}
 
-  const navBtnClass = (id) =>
-    `nav-btn ${activeSection === id ? "nav-btn-active" : ""}`;
+.flower-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
 
-  const activeSlide = sliderItems[current];
+.flower {
+  position: absolute;
+  font-size: 1.5rem;
+  animation: flowerFall 2.4s linear infinite;
+}
 
-  return (
-    <div className="site-root">
-      {/* FLOWER WELCOME OVERLAY */}
-      {showWelcome && (
-        <div className="welcome-overlay">
-          <div className="welcome-inner">
-            <p className="welcome-title">Welcome to Neesmu Mall</p>
-            <p className="welcome-sub">Theatre & Turf bot booking guide</p>
-          </div>
-          <div className="flower-layer">
-            {Array.from({ length: 10 }).map((_, i) => (
-              <span key={i} className={`flower f${(i % 5) + 1}`}>
-                🌸
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
+.f1 {
+  left: 10%;
+  animation-delay: 0s;
+}
+.f2 {
+  left: 30%;
+  animation-delay: 0.2s;
+}
+.f3 {
+  left: 50%;
+  animation-delay: 0.4s;
+}
+.f4 {
+  left: 70%;
+  animation-delay: 0.6s;
+}
+.f5 {
+  left: 90%;
+  animation-delay: 0.8s;
+}
 
-      {/* NAVBAR */}
-      <header className="nav">
-        <div className="nav-left">
-          <div className="logo-orb">N</div>
-          <span className="logo-title">Neesmu Mall</span>
-        </div>
+/* NAVBAR – LIGHT */
 
-        <nav className="nav-links nav-links-desktop">
-          <button className={navBtnClass("home")} onClick={() => scrollTo("home")}>
-            Home
-          </button>
-          <button
-            className={navBtnClass("about")}
-            onClick={() => scrollTo("about")}
-          >
-            About
-          </button>
-          <button
-            className={navBtnClass("services")}
-            onClick={() => scrollTo("services")}
-          >
-            Services
-          </button>
-          <button
-            className={navBtnClass("contact")}
-            onClick={() => scrollTo("contact")}
-          >
-            Contact
-          </button>
-        </nav>
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1.6rem;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+}
 
-        <button
-          className="nav-menu-btn"
-          onClick={() => setMobileMenuOpen((v) => !v)}
-        >
-          ☰
-        </button>
-      </header>
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
 
-      {/* MOBILE NAV MENU */}
-      {mobileMenuOpen && (
-        <div className="mobile-menu">
-          <button className={navBtnClass("home")} onClick={() => scrollTo("home")}>
-            Home
-          </button>
-          <button
-            className={navBtnClass("about")}
-            onClick={() => scrollTo("about")}
-          >
-            About
-          </button>
-          <button
-            className={navBtnClass("services")}
-            onClick={() => scrollTo("services")}
-          >
-            Services
-          </button>
-          <button
-            className={navBtnClass("contact")}
-            onClick={() => scrollTo("contact")}
-          >
-            Contact
-          </button>
-        </div>
-      )}
+.logo-orb {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f9fafb;
+  font-weight: 700;
+}
 
-      <main>
-        {/* HOME */}
-        <section id="home" className="hero">
-          <div className="hero-content">
-            <h1>
-              <span className="hero-highlight">Neesmu Mall</span>
-            </h1>
-            <p className="hero-sub">Theatre & Turf inside one modern mall.</p>
-            <p className="hero-text">
-              Neesmu Mall is an entertainment spot with a{" "}
-              <strong>cinema style theatre</strong> and a{" "}
-              <strong>green turf ground</strong>. Users don&apos;t book from
-              this website. This site only shows clear steps. Real booking for{" "}
-              <strong>movies and turf slots</strong> happens through the{" "}
-              <strong>Neesmu Smart Booking Bot</strong>.
-            </p>
-          </div>
+.logo-title {
+  font-size: 0.98rem;
+  font-weight: 600;
+}
 
-          {/* SINGLE SLIDE WINDOW */}
-          <div className="slider-row">
-            <div className="slider-row-glow" />
-            <article className="single-slide elevated-card">
-              <div className="slide-image">
-                <img src={activeSlide.img} alt={activeSlide.label} />
-              </div>
-              <div className="slide-caption">
-                <span>{activeSlide.label}</span>
-                <h3>{activeSlide.title}</h3>
-              </div>
-            </article>
+.nav-links {
+  display: flex;
+  gap: 0.6rem;
+}
 
-            <div className="slider-dots">
-              {sliderItems.map((s, i) => (
-                <button
-                  key={s.id}
-                  className={i === current ? "dot dot-active" : "dot"}
-                  onClick={() => setCurrent(i)}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
+.nav-btn {
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.8rem;
+  background: transparent;
+  color: #0f172a;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease,
+    transform 0.15s ease, box-shadow 0.15s ease;
+}
 
-        {/* ABOUT */}
-        <section id="about" className="section">
-          <h2 className="section-title">About the Theatre & Turf</h2>
-          <p className="section-desc">
-            Neesmu Mall has two main zones – a{" "}
-            <strong>movie theatre</strong> and a{" "}
-            <strong>multi-sport turf ground</strong>. Both are designed for
-            friends, family and team outings.
-          </p>
+.nav-btn:hover {
+  background: #eff6ff;
+  border-color: rgba(148, 163, 184, 0.7);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(148, 163, 184, 0.35);
+}
 
-          <div className="about-grid">
-            {/* Theatre */}
-            <article className="about-card elevated-card">
-              <div className="about-top-image">
-                <img
-                  src="https://t3.ftcdn.net/jpg/03/74/28/58/360_F_374285858_KzJ88FysqJ79AhyNPW2lqnBtsRTokuav.jpg"
-                  alt="Theatre hall"
-                />
-              </div>
-              <div className="about-body">
-                <h3>Theatre – All Type of Movies</h3>
-                <p>
-                  The Neesmu theatre supports{" "}
-                  <strong>all kinds of movies</strong> – Tamil, English, Hindi,
-                  kids movies and special fan shows.
-                </p>
-                <ul>
-                  <li>Big screen, surround sound, comfy seats</li>
-                  <li>New releases, re–runs & private shows</li>
-                  <li>Morning, matinee, evening & night shows</li>
-                  <li>Perfect for birthdays & group hangouts</li>
-                </ul>
-              </div>
-            </article>
+.nav-btn-active {
+  border-color: #38bdf8;
+  background: linear-gradient(135deg, #e0f2fe, #eef2ff);
+  color: #0b1120;
+  animation: navBlink 0.55s ease-out 1;
+}
 
-            {/* Turf */}
-            <article className="about-card elevated-card">
-              <div className="about-top-image">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Y0mZ_uonz28R2Rk5sC4QO95XaUbyKARp8w&s"
-                  alt="Turf ground"
-                />
-              </div>
-              <div className="about-body">
-                <h3>Turf – All Type of Games</h3>
-                <p>
-                  The Neesmu turf is built for{" "}
-                  <strong>football, cricket, box-cricket</strong> and fun games
-                  with friends.
-                </p>
-                <ul>
-                  <li>Football 5s / 7s matches & practice</li>
-                  <li>Cricket & box-cricket style games</li>
-                  <li>Evening / night slots with lights</li>
-                  <li>College and office tournaments</li>
-                </ul>
-              </div>
-            </article>
-          </div>
-        </section>
+/* mobile nav button */
 
-        {/* SERVICES – BOT FLOW */}
-        <section id="services" className="section">
-          <h2 className="section-title">How Booking Works (Via Bot)</h2>
-          <p className="section-desc">
-            Neesmu Mall bookings are done{" "}
-            <strong>only through the Neesmu Smart Booking Bot</strong>. This
-            site does not show any form or payment. Below cards explain how the
-            bot will talk with the user.
-          </p>
+.nav-menu-btn {
+  display: none;
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+  color: #0f172a;
+  cursor: pointer;
+}
 
-          <div className="service-grid">
-            {/* Theatre booking */}
-            <article className="service-card elevated-card">
-              <h3>🎬 Theatre Booking – Bot Flow</h3>
-              <p>
-                User selects <strong>“Theatre Booking”</strong> inside the bot.
-              </p>
-              <ul>
-                <li>Bot shows movie list & poster preview.</li>
-                <li>Asks for date & show time (morning / matinee / night).</li>
-                <li>Asks for class (VIP / Balcony / Regular).</li>
-                <li>Asks how many tickets are needed.</li>
-                <li>
-                  Finally bot sends a summary message with all details for
-                  confirmation.
-                </li>
-              </ul>
-              <button className="btn-outline" onClick={openBot}>
-                Open Bot for Theatre
-              </button>
-            </article>
+.mobile-menu {
+  display: none;
+}
 
-            {/* Turf booking */}
-            <article className="service-card elevated-card">
-              <h3>⚽ Turf Booking – Bot Flow</h3>
-              <p>
-                User selects <strong>“Turf Booking”</strong> inside the bot.
-              </p>
-              <ul>
-                <li>Bot asks which game – football, cricket, box-cricket.</li>
-                <li>Then asks for date & time slot.</li>
-                <li>Collects number of players joining.</li>
-                <li>Optional notes (team name, friendly match info).</li>
-                <li>
-                  Sends final slot summary & confirms booking inside the chat.
-                </li>
-              </ul>
-              <button className="btn-outline" onClick={openBot}>
-                Open Bot for Turf
-              </button>
-            </article>
-          </div>
-        </section>
+/* HERO */
 
-        {/* CONTACT */}
-        <section id="contact" className="section">
-          <h2 className="section-title">Contact Neesmu Mall</h2>
-          <p className="section-desc">
-            For general questions about the mall, theatre or turf, you can use
-            the details below. For booking confirmation, always trust the Smart
-            Booking Bot messages.
-          </p>
+.hero {
+  padding: 2.2rem 1.6rem 3rem;
+  background: linear-gradient(180deg, #e0f2fe 0, #ffffff 40%);
+}
 
-          <div className="contact-grid">
-            <div className="contact-card elevated-card">
-              <h3>Address</h3>
-              <p>
-                <strong>Neesmu Mall</strong>
-                <br />
-                45, Royal Street, Lakshmi Nagar
-                <br />
-                Sivakasi – 626123, Tamil Nadu
-              </p>
+.hero-content {
+  max-width: 840px;
+  margin: 0 auto 0.5rem;
+  text-align: center;
+}
 
-              <h3>Contact</h3>
-              <p>
-                📞 <strong>+91 90876 54321</strong>
-                <br />
-                ✉️ <strong>info@neesmu-mall.com</strong>
-              </p>
-            </div>
+.hero-highlight {
+  background: linear-gradient(to right, #0ea5e9, #6366f1, #f97316);
+  -webkit-background-clip: text;
+  color: transparent;
+}
 
-            <div className="contact-card elevated-card">
-              <h3>Social Media</h3>
-              <p>Follow us and send a message any time:</p>
-              <div className="social-row">
-                <button className="social-pill">📘 Facebook</button>
-                <button className="social-pill">📸 Instagram</button>
-                <button className="social-pill">▶ YouTube</button>
-                <button className="social-pill">💬 WhatsApp</button>
-              </div>
-              <p className="handle">
-                Official handle: <strong>@neesmuMall2025</strong>
-              </p>
-            </div>
-          </div>
-        </section>
+.hero-sub {
+  font-size: 1rem;
+  margin-top: 0.2rem;
+  opacity: 0.9;
+}
 
-        {/* FEEDBACK */}
-        <section id="feedback" className="section">
-          <h2 className="section-title">User Feedback</h2>
-          <p className="section-desc">
-            Share how your experience with Neesmu Mall theatre or turf felt.
-            This form is only for feedback – booking still happens in the bot.
-          </p>
+.hero-text {
+  margin-top: 0.9rem;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  line-height: 1.7;
+}
 
-          <div className="feedback-card elevated-card">
-            <form onSubmit={handleFeedbackSubmit} className="feedback-form">
-              <div className="form-row">
-                <label>
-                  Name
-                  <input type="text" placeholder="Your name (optional)" />
-                </label>
-              </div>
-              <div className="form-row">
-                <label>
-                  Rating
-                  <select defaultValue="">
-                    <option value="" disabled>
-                      Select a rating
-                    </option>
-                    <option>⭐ Very bad</option>
-                    <option>⭐⭐ Ok</option>
-                    <option>⭐⭐⭐ Good</option>
-                    <option>⭐⭐⭐⭐ Very good</option>
-                    <option>⭐⭐⭐⭐⭐ Excellent</option>
-                  </select>
-                </label>
-              </div>
-              <div className="form-row">
-                <label>
-                  Feedback
-                  <textarea
-                    rows="3"
-                    placeholder="Tell us what you liked or what we can improve..."
-                  />
-                </label>
-              </div>
-              <button type="submit" className="btn-primary feedback-btn">
-                Submit Feedback
-              </button>
-            </form>
-          </div>
-        </section>
-      </main>
+/* SLIDER – SINGLE WINDOW */
 
-      {/* FLOATING BOT ICON */}
-      <button className="floating-bot" onClick={openBot}>
-        🤖
-      </button>
+.slider-row {
+  max-width: 960px;
+  margin: 2rem auto 0;
+  position: relative;
+  padding: 1rem 0 0.5rem;
+}
 
-      {/* FOOTER */}
-      <footer className="footer">
-        <p className="footer-title">Features of this site</p>
-        <ul className="footer-list">
-          <li>Explains Neesmu Mall theatre & turf in simple steps.</li>
-          <li>Shows how Neesmu Smart Booking Bot handles bookings.</li>
-          <li>Responsive layout for mobile, tablet and desktop.</li>
-          <li>Single window slider with mall, movie & turf photos.</li>
-          <li>Floating bot shortcut & user feedback section.</li>
-        </ul>
-        <p className="footer-copy">
-          © 2025 Neesmu Mall • Built as a booking-bot guide website.
-        </p>
-      </footer>
-    </div>
+.slider-row-glow {
+  position: absolute;
+  inset: -30px 10%;
+  background: radial-gradient(
+    circle at top,
+    rgba(56, 189, 248, 0.18),
+    transparent 65%
   );
-};
+  filter: blur(2px);
+  animation: skyGlow 6s ease-in-out infinite alternate;
+  pointer-events: none;
+}
 
-export default App;
+.single-slide {
+  position: relative;
+  margin: 0 auto;
+  max-width: 720px;
+  background: #ffffff;
+  border-radius: 1.2rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  box-shadow: 0 16px 40px rgba(148, 163, 184, 0.38);
+  padding: 0.9rem;
+}
+
+.single-slide .slide-image {
+  border-radius: 0.9rem;
+  overflow: hidden;
+}
+
+.single-slide .slide-image img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+}
+
+.slide-caption {
+  margin-top: 0.55rem;
+}
+
+.slide-caption span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.78;
+}
+
+.slide-caption h3 {
+  margin: 0.15rem 0 0;
+  font-size: 0.98rem;
+}
+
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-top: 0.8rem;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(148, 163, 184, 0.7);
+  cursor: pointer;
+}
+
+.dot-active {
+  background: #0ea5e9;
+  transform: scale(1.4);
+}
+
+/* COMMON SECTION */
+
+.section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.6rem 3rem;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.section-desc {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  line-height: 1.7;
+}
+
+/* Generic elevated card + diamond effect (light) */
+
+.elevated-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.elevated-card::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(
+    circle at center,
+    rgba(59, 130, 246, 0.15),
+    transparent 60%
+  );
+  transform: translate(-120%, 120%) rotate(35deg);
+  opacity: 0;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.elevated-card:hover::before {
+  opacity: 1;
+  transform: translate(10%, -10%) rotate(35deg);
+}
+
+/* ABOUT */
+
+.about-grid {
+  display: grid;
+  gap: 1.3rem;
+  margin-top: 1.4rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.about-card {
+  background: #ffffff;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  box-shadow: 0 16px 40px rgba(148, 163, 184, 0.35);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.about-top-image {
+  width: 100%;
+  height: 210px;
+  overflow: hidden;
+}
+
+.about-top-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.about-body {
+  padding: 1rem 1.2rem 1.2rem;
+}
+
+.about-body h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.02rem;
+}
+
+.about-body p {
+  margin: 0 0 0.45rem;
+  font-size: 0.86rem;
+  opacity: 0.9;
+}
+
+.about-body ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.8rem;
+}
+
+.about-body li {
+  margin-bottom: 0.2rem;
+}
+
+.about-card.elevated-card::before {
+  opacity: 0.15;
+}
+
+.about-card:hover .about-top-image img {
+  transform: scale(1.03);
+}
+
+@media (max-width: 640px) {
+  .about-top-image {
+    height: 190px;
+  }
+}
+
+/* SERVICES */
+
+.service-grid {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.4rem;
+}
+
+.service-card {
+  background: #ffffff;
+  border-radius: 1.1rem;
+  padding: 1rem 1.1rem 1.2rem;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  box-shadow: 0 14px 32px rgba(148, 163, 184, 0.4);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.service-card:hover {
+  border-color: #0ea5e9;
+  box-shadow: 0 18px 44px rgba(59, 130, 246, 0.35);
+  transform: translateY(-3px);
+}
+
+.service-card h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.02rem;
+}
+
+.service-card p {
+  margin: 0 0 0.45rem;
+  font-size: 0.86rem;
+  opacity: 0.92;
+}
+
+.service-card ul {
+  margin: 0 0 0.6rem;
+  padding-left: 1.1rem;
+  font-size: 0.8rem;
+}
+
+.service-card li {
+  margin-bottom: 0.2rem;
+}
+
+/* BUTTONS – animated */
+
+.btn-primary,
+.btn-outline,
+.social-pill {
+  border-radius: 999px;
+  padding: 0.6rem 1.6rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+/* primary gradient */
+
+.btn-primary {
+  border: 1px solid transparent;
+  background: linear-gradient(90deg, #6366f1, #0ea5e9);
+  color: #f9fafb;
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.55);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 16px 36px rgba(37, 99, 235, 0.8);
+}
+
+.btn-outline {
+  background: #ffffff;
+  border: 1px solid rgba(148, 163, 184, 0.9);
+  color: #0f172a;
+}
+
+.btn-outline:hover {
+  background: #eff6ff;
+  border-color: #0ea5e9;
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 0 10px 26px rgba(148, 163, 184, 0.45);
+}
+
+/* Social pills */
+
+.social-pill {
+  background: #ffffff;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  color: #0f172a;
+}
+
+.social-pill:hover {
+  background: #dbeafe;
+  border-color: #0ea5e9;
+  transform: translateY(-1px);
+}
+
+/* CONTACT */
+
+.contact-grid {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 1.4rem;
+}
+
+.contact-card {
+  background: #ffffff;
+  border-radius: 1.1rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  box-shadow: 0 14px 32px rgba(148, 163, 184, 0.4);
+}
+
+.contact-card h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.02rem;
+}
+
+.contact-card p {
+  margin: 0 0 0.45rem;
+  font-size: 0.86rem;
+  opacity: 0.9;
+}
+
+.social-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.6rem 0 0.7rem;
+}
+
+.handle {
+  font-size: 0.84rem;
+  opacity: 0.9;
+}
+
+/* FEEDBACK */
+
+.feedback-card {
+  margin-top: 1.4rem;
+  background: #ffffff;
+  border-radius: 1.1rem;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  box-shadow: 0 14px 32px rgba(148, 163, 184, 0.4);
+}
+
+.feedback-form {
+  padding: 1rem 1.2rem 1.3rem;
+}
+
+.form-row {
+  margin-bottom: 0.7rem;
+}
+
+.form-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.82rem;
+}
+
+input,
+select,
+textarea {
+  border-radius: 0.6rem;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  padding: 0.45rem 0.6rem;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 0.82rem;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+textarea {
+  resize: vertical;
+}
+
+.feedback-btn {
+  margin-top: 0.2rem;
+}
+
+/* FLOATING BOT */
+
+.floating-bot {
+  position: fixed;
+  right: 1.2rem;
+  bottom: 1.3rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: radial-gradient(circle at top, #6366f1, #0ea5e9);
+  box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.8);
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+  animation: botPulse 2.4s infinite;
+  transition: transform 0.2s ease;
+}
+
+.floating-bot:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* FOOTER */
+
+.footer {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.8rem 1.6rem 2.3rem;
+  font-size: 0.82rem;
+  opacity: 0.9;
+}
+
+.footer-title {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.footer-list {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.footer-list li {
+  margin-bottom: 0.15rem;
+}
+
+.footer-copy {
+  margin-top: 0.5rem;
+  opacity: 0.85;
+}
+
+/* ANIMATIONS */
+
+@keyframes botPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(56, 189, 248, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+  }
+}
+
+@keyframes flowerFall {
+  0% {
+    transform: translateY(-20%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120%);
+    opacity: 0;
+  }
+}
+
+@keyframes navBlink {
+  0% {
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(56, 189, 248, 0);
+  }
+}
+
+@keyframes skyGlow {
+  0% {
+    transform: translateY(0);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(15px);
+    opacity: 0.4;
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .nav-links-desktop {
+    display: none;
+  }
+
+  .nav-menu-btn {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.6rem 1.6rem 0.8rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+    backdrop-filter: blur(10px);
+  }
+
+  .mobile-menu .nav-btn {
+    padding-left: 0;
+  }
+
+  .single-slide .slide-image img {
+    height: 220px;
+  }
+
+  .floating-bot {
+    right: 0.9rem;
+    bottom: 0.9rem;
+    width: 44px;
+    height: 44px;
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero,
+  .section,
+  .footer {
+    padding-inline: 1.1rem;
+  }
+
+  .contact-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
