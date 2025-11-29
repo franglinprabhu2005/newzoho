@@ -27,12 +27,12 @@ body {
 .nav {
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 30;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.7rem 1.6rem;
-  background: rgba(3, 7, 18, 0.95);
+  background: rgba(3, 7, 18, 0.96);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(30, 64, 175, 0.6);
 }
@@ -63,7 +63,7 @@ body {
 }
 
 .logo-title {
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   font-weight: 600;
 }
 
@@ -80,9 +80,9 @@ body {
 .nav-links button {
   border: none;
   background: transparent;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: #e5e7eb;
-  padding: 0.3rem 0.8rem;
+  padding: 0.3rem 0.9rem;
   border-radius: 999px;
   cursor: pointer;
   border: 1px solid transparent;
@@ -97,7 +97,7 @@ body {
 .nav-cta {
   border-radius: 999px;
   border: none;
-  padding: 0.55rem 1.4rem;
+  padding: 0.6rem 1.5rem;
   font-size: 0.8rem;
   background: linear-gradient(90deg, #5b21ff, #0ea5e9);
   color: #f9fafb;
@@ -110,6 +110,22 @@ body {
   transform: translateY(-1px);
   box-shadow: 0 16px 40px rgba(56, 189, 248, 1);
   filter: brightness(1.05);
+}
+
+/* MOBILE NAV BUTTON & MENU */
+
+.nav-menu-btn {
+  display: none;
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+  color: #e5e7eb;
+  cursor: pointer;
+  margin-right: 0.6rem;
+}
+
+.mobile-menu {
+  display: none;
 }
 
 /* HERO */
@@ -132,7 +148,7 @@ body {
 }
 
 .hero h1 {
-  font-size: clamp(2.1rem, 3.2vw, 2.8rem);
+  font-size: clamp(2.2rem, 3.3vw, 3rem);
   margin: 0.45rem 0 0.9rem;
 }
 
@@ -144,8 +160,9 @@ body {
 
 .hero-text {
   font-size: 0.96rem;
-  opacity: 0.88;
+  opacity: 0.9;
   max-width: 36rem;
+  line-height: 1.6;
 }
 
 .hero-actions {
@@ -158,7 +175,7 @@ body {
 .btn-primary {
   border-radius: 999px;
   border: none;
-  padding: 0.7rem 1.8rem;
+  padding: 0.75rem 1.9rem;
   font-size: 0.9rem;
   background: linear-gradient(90deg, #5b21ff, #0ea5e9);
   color: #f9fafb;
@@ -175,7 +192,7 @@ body {
 
 .btn-ghost {
   border-radius: 999px;
-  padding: 0.65rem 1.6rem;
+  padding: 0.7rem 1.7rem;
   font-size: 0.9rem;
   background: rgba(15, 23, 42, 0.96);
   border: 1px solid rgba(148, 163, 184, 0.7);
@@ -208,7 +225,7 @@ body {
 
 .hero-right {
   display: flex;
-  justify-content: center; /* CENTER */
+  justify-content: center;
 }
 
 .slider-card {
@@ -223,7 +240,8 @@ body {
 }
 
 .slider-image {
-  width: 260px;
+  width: 100%;
+  max-width: 280px;
   margin: 0 auto;
   border-radius: 1rem;
   overflow: hidden;
@@ -231,9 +249,10 @@ body {
 
 .slider-image img {
   width: 100%;
-  height: 260px;
+  height: auto;            /* use natural image size */
+  display: block;
   object-fit: cover;
-  transition: transform 0.35s ease;
+  transition: transform 0.3s ease;
 }
 
 .slider-card:hover .slider-image img {
@@ -253,7 +272,7 @@ body {
 
 .slider-text h3 {
   margin: 0.3rem 0 0.15rem;
-  font-size: 1rem;
+  font-size: 1.02rem;
 }
 
 .slider-text p {
@@ -283,7 +302,7 @@ body {
   transform: scale(1.4);
 }
 
-/* COMMON SECTIONS */
+/* COMMON SECTION STYLE */
 
 .section {
   max-width: 1120px;
@@ -292,14 +311,15 @@ body {
 }
 
 .section-title {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   margin-bottom: 0.4rem;
 }
 
 .section-desc {
   font-size: 0.9rem;
-  opacity: 0.86;
+  opacity: 0.88;
   max-width: 40rem;
+  line-height: 1.7;
 }
 
 /* ABOUT */
@@ -313,44 +333,46 @@ body {
 
 .info-card {
   background: rgba(15, 23, 42, 0.96);
-  border-radius: 1.1rem;
-  padding: 1rem 1.1rem 1.1rem;
+  border-radius: 1.2rem;
   border: 1px solid rgba(148, 163, 184, 0.5);
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.9);
+  overflow: hidden;              /* image + border match neatly */
 }
 
-.square-image {
-  width: 170px;
-  height: 170px;
-  border-radius: 0.9rem;
-  overflow: hidden;
-  margin-bottom: 0.7rem;
-}
-
-.square-image img {
+.wide-image {
   width: 100%;
-  height: 100%;
+  background: #020617;
+}
+
+.wide-image img {
+  width: 100%;
+  height: auto;
+  display: block;
   object-fit: cover;
 }
 
-.info-card h3 {
-  margin: 0 0 0.25rem;
-  font-size: 1rem;
+.card-body {
+  padding: 0.9rem 1rem 1.1rem;
 }
 
-.info-card p {
+.card-body h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.02rem;
+}
+
+.card-body p {
   margin: 0 0 0.45rem;
-  font-size: 0.85rem;
+  font-size: 0.86rem;
   opacity: 0.9;
 }
 
-.info-card ul {
+.card-body ul {
   margin: 0;
   padding-left: 1.1rem;
   font-size: 0.8rem;
 }
 
-.info-card li {
+.card-body li {
   margin-bottom: 0.2rem;
 }
 
@@ -365,7 +387,7 @@ body {
 
 .service-card {
   background: rgba(15, 23, 42, 0.96);
-  border-radius: 1.1rem;
+  border-radius: 1.2rem;
   padding: 1rem 1.1rem 1.2rem;
   border: 1px solid rgba(148, 163, 184, 0.5);
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.9);
@@ -373,12 +395,12 @@ body {
 
 .service-card h3 {
   margin: 0 0 0.3rem;
-  font-size: 1rem;
+  font-size: 1.02rem;
 }
 
 .service-card p {
   margin: 0 0 0.45rem;
-  font-size: 0.85rem;
+  font-size: 0.86rem;
   opacity: 0.9;
 }
 
@@ -419,7 +441,7 @@ body {
 
 .contact-card {
   background: rgba(15, 23, 42, 0.96);
-  border-radius: 1.1rem;
+  border-radius: 1.2rem;
   padding: 1rem 1.1rem;
   border: 1px solid rgba(148, 163, 184, 0.5);
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.9);
@@ -427,12 +449,12 @@ body {
 
 .contact-card h3 {
   margin: 0 0 0.3rem;
-  font-size: 1rem;
+  font-size: 1.02rem;
 }
 
 .contact-card p {
   margin: 0 0 0.45rem;
-  font-size: 0.85rem;
+  font-size: 0.86rem;
   opacity: 0.9;
 }
 
@@ -493,7 +515,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 30;
+  z-index: 40;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -535,8 +557,31 @@ body {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .nav-links {
+  .nav-links-desktop {
     display: none;
+  }
+
+  .nav-menu-btn {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.6rem 1.6rem 0.8rem;
+    background: rgba(3, 7, 18, 0.97);
+    border-bottom: 1px solid rgba(30, 64, 175, 0.6);
+  }
+
+  .mobile-menu button {
+    border: none;
+    background: transparent;
+    color: #e5e7eb;
+    text-align: left;
+    padding: 0.35rem 0;
+    font-size: 0.88rem;
+    cursor: pointer;
   }
 }
 
