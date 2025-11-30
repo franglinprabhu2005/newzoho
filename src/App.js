@@ -38,7 +38,6 @@ const App = () => {
   const [current, setCurrent] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-  const [showWelcome, setShowWelcome] = useState(true);
 
   // auto slide
   useEffect(() => {
@@ -49,9 +48,37 @@ const App = () => {
     return () => clearInterval(id);
   }, []);
 
-  // flower rain welcome hide
+  const activeSlide = sliderItems[current];
 
+  // nav button class
+  const navBtnClass = (section) =>
+    activeSection === section ? "nav-link nav-link-active" : "nav-link";
 
+  // smooth scroll to section
+  const scrollTo = (sectionId) => {
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      setActiveSection(sectionId);
+      setMobileMenuOpen(false);
+    }
+  };
+
+  // open bot (WhatsApp / SalesIQ / custom link)
+  const openBot = () => {
+    // TODO: replace with real bot link
+    window.open("https://example.com/neesmu-bot", "_blank");
+  };
+
+  // feedback submit
+  const handleFeedbackSubmit = (e) => {
+    e.preventDefault();
+    alert("Thank you for your feedback! ✅");
+    e.target.reset();
+  };
+
+  return (
+    <div className="app-root">
       {/* NAVBAR */}
       <header className="nav">
         <div className="nav-left">
@@ -372,8 +399,6 @@ const App = () => {
         </section>
       </main>
 
-     
-
       {/* FOOTER */}
       <footer className="footer">
         <p className="footer-title">Features of this site</p>
@@ -382,7 +407,7 @@ const App = () => {
           <li>Shows how Neesmu Smart Booking Bot works for bookings.</li>
           <li>Dark premium theme with smooth animations & hover effects.</li>
           <li>Single window image slider with running light border.</li>
-          <li>Flower rain welcome & user feedback section.</li>
+          <li>User feedback section for experience sharing.</li>
         </ul>
         <p className="footer-copy">
           © 2025 Neesmu Mall • Built as a booking-bot guide website.
