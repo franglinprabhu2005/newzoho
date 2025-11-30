@@ -50,53 +50,7 @@ const App = () => {
   }, []);
 
   // flower rain welcome hide
-  useEffect(() => {
-    const t = setTimeout(() => setShowWelcome(false), 2600);
-    return () => clearTimeout(t);
-  }, []);
 
-  const scrollTo = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-      setActiveSection(id);
-      setMobileMenuOpen(false);
-    }
-  };
-
-  const openBot = () => {
-    alert("Booking only via Neesmu Smart Booking Bot (SalesIQ bot integration).");
-  };
-
-  const handleFeedbackSubmit = (e) => {
-    e.preventDefault();
-    alert("Thanks for your feedback! 🙌");
-    e.target.reset();
-  };
-
-  const navBtnClass = (id) =>
-    `nav-btn ${activeSection === id ? "nav-btn-active" : ""}`;
-
-  const activeSlide = sliderItems[current];
-
-  return (
-    <div className="site-root">
-      {/* FLOWER RAIN WELCOME OVERLAY */}
-      {showWelcome && (
-        <div className="welcome-overlay">
-          <div className="welcome-inner">
-            <p className="welcome-title">Welcome to Neesmu Mall</p>
-            <p className="welcome-sub">Theatre & Turf Smart Booking Guide</p>
-          </div>
-          <div className="flower-layer">
-            {Array.from({ length: 12 }).map((_, i) => (
-              <span key={i} className={`flower f${(i % 6) + 1}`}>
-                🌸
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* NAVBAR */}
       <header className="nav">
