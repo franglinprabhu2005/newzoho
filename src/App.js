@@ -419,9 +419,9 @@ const App = () => {
       </main>
 
       {/* FLOATING BOT ICON */}
-      <button className="floating-bot" onClick={openBot}>
+     // <button className="floating-bot" onClick={openBot}>
         🤖
-      </button>
+     // </button>
 
       {/* FOOTER */}
       <footer className="footer">
